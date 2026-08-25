@@ -936,10 +936,16 @@
         }
 
         /* ===========================
-           RESUME PREVIEW (Hidden)
+           RESUME CONTENT - VISIBLE FOR PDF GENERATION
         =========================== */
         #resumeContent {
-            display: none;
+            position: absolute;
+            left: -9999px;
+            top: 0;
+            width: 800px;
+            background: #fff;
+            padding: 40px;
+            z-index: -1;
         }
     </style>
 </head>
@@ -1034,20 +1040,20 @@
                     </div>
                     <div class="section-content">
                         <p class="about-text">
-                            I'm <strong>Naphtali Sunday</strong> — a <strong>Web Developer</strong>, <strong>Data Analyst</strong>,
+                            I'm <strong>Naphtali Sunday</strong> a <strong>Web Developer</strong>, <strong>Data Analyst</strong>,
                             and <strong>MEAL Specialist</strong> with <strong>6+ years</strong> of experience building
                             <span class="highlight">web applications</span>, <span class="highlight">data systems</span>,
                             and leading <span class="highlight">capacity building</span> initiatives.
                         </p>
                         <p class="about-text mt-1">
-                            I specialize in <strong>full-stack web development</strong> — building custom web apps,
+                            I specialize in <strong>full-stack web development</strong>  building custom web apps,
                             websites, and data-driven platforms. I've worked extensively with
                             <strong>USAID/PEPFAR-funded</strong> health programs across Northeast Nigeria,
                             managing data systems, ensuring <strong>99% data integrity</strong>, and training
                             <strong>100+ professionals</strong> in data management and digital skills.
                         </p>
                         <p class="about-text mt-1">
-                            My work bridges the gap between <strong>technology and impact</strong> —
+                            My work bridges the gap between <strong>technology and impact</strong> 
                             from designing <strong>web-based restaurant systems</strong> to tracking
                             <strong>HIV case management data</strong> with <strong>LAMIS</strong> and <strong>DHIS2</strong>.
                             I'm passionate about using <span class="highlight">code</span> and <span class="highlight">data</span>
@@ -1401,7 +1407,7 @@
     </div>
 
     <!-- ===========================
-    RESUME CONTENT (Hidden - Used for PDF/Word generation)
+    RESUME CONTENT (Hidden off-screen but visible to html2pdf)
     =========================== -->
     <div id="resumeContent">
         <div style="font-family: 'Inter', Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 40px; color: #1a1a2e; line-height: 1.6; background: #fff;">
@@ -1640,7 +1646,8 @@
 
         // --- TXT Download ---
         function downloadTxtResume() {
-            const content = document.getElementById('resumeContent').innerText;
+            const element = document.getElementById('resumeContent');
+            const content = element.innerText;
             const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
@@ -1655,11 +1662,22 @@
         function downloadPdfResume() {
             const element = document.getElementById('resumeContent');
             
-            // Show a loading indicator
             const btn = document.querySelector('.resume-btn');
             const originalText = btn.innerHTML;
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating PDF...';
             btn.style.opacity = '0.7';
+
+            // Clone the element to avoid layout issues
+            const clone = element.cloneNode(true);
+            clone.style.position = 'fixed';
+            clone.style.left = '0';
+            clone.style.top = '0';
+            clone.style.width = '800px';
+            clone.style.background = '#fff';
+            clone.style.padding = '40px';
+            clone.style.zIndex = '99999';
+            clone.style.display = 'block';
+            document.body.appendChild(clone);
 
             const opt = {
                 margin: [10, 10, 10, 10],
@@ -1670,7 +1688,8 @@
                     useCORS: true,
                     letterRendering: true,
                     backgroundColor: '#ffffff',
-                    logging: false
+                    logging: false,
+                    width: 800
                 },
                 jsPDF: {
                     unit: 'mm',
@@ -1680,11 +1699,13 @@
                 pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
             };
 
-            html2pdf().set(opt).from(element).save().then(function() {
+            html2pdf().set(opt).from(clone).save().then(function() {
+                document.body.removeChild(clone);
                 btn.innerHTML = originalText;
                 btn.style.opacity = '1';
             }).catch(function(err) {
                 console.error('PDF generation error:', err);
+                document.body.removeChild(clone);
                 btn.innerHTML = originalText;
                 btn.style.opacity = '1';
                 alert('Error generating PDF. Please try again or use the Text format.');
@@ -1693,7 +1714,8 @@
 
         // --- Word Download (HTML format that Word can open) ---
         function downloadWordResume() {
-            const content = document.getElementById('resumeContent').innerHTML;
+            const element = document.getElementById('resumeContent');
+            const content = element.innerHTML;
             
             const wordHTML = `
                 <html xmlns:o='urn:schemas-microsoft-com:office:office' 
@@ -1702,8 +1724,16 @@
                 <head>
                     <meta charset="utf-8">
                     <title>Naphtali Sunday - Resume</title>
+                    <!--[if gte mso 9]>
+                    <xml>
+                        <w:WordDocument>
+                            <w:View>Print</w:View>
+                            <w:Zoom>100</w:Zoom>
+                        </w:WordDocument>
+                    </xml>
+                    <![endif]-->
                     <style>
-                        body { font-family: 'Inter', Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 40px; color: #1a1a2e; line-height: 1.6; background: #fff; }
+                        body { font-family: 'Arial', sans-serif; max-width: 800px; margin: 0 auto; padding: 40px; color: #1a1a2e; line-height: 1.6; background: #fff; }
                         h1 { font-size: 28px; font-weight: 800; margin: 0; color: #0f172a; }
                         h2 { font-size: 16px; font-weight: 700; color: #1a5a8c; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 20px; }
                         table { width: 100%; border-collapse: collapse; }
