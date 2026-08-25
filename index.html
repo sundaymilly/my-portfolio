@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Naphtali Sunday · Data Analyst & M&E Specialist</title>
+    <title>Naphtali Sunday · Web Developer & Data Analyst</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <style>
@@ -157,6 +157,11 @@
             color: #fff;
         }
 
+        .badge.success {
+            background: #dcfce7;
+            color: #16a34a;
+        }
+
         .hero-right {
             display: flex;
             flex-direction: column;
@@ -202,6 +207,16 @@
 
         .contact-links a i {
             font-size: 14px;
+        }
+
+        .contact-links a.resume-btn {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .contact-links a.resume-btn:hover {
+            background: var(--accent-light);
+            box-shadow: 0 4px 16px rgba(26, 90, 140, 0.4);
         }
 
         /* ===========================
@@ -267,6 +282,11 @@
 
         .about-text strong {
             color: var(--text);
+        }
+
+        .about-text .highlight {
+            color: var(--accent);
+            font-weight: 600;
         }
 
         .about-highlights {
@@ -524,6 +544,7 @@
             grid-template-columns: repeat(4, 1fr);
             gap: 12px;
             margin-top: 16px;
+            margin-bottom: 12px;
         }
 
         .stat-card {
@@ -588,12 +609,21 @@
         .footer .right a {
             color: var(--text-muted);
             text-decoration: none;
-            font-size: 13px;
+            font-size: 15px;
             transition: var(--transition);
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--surface-dark);
         }
 
         .footer .right a:hover {
-            color: var(--accent);
+            color: #fff;
+            background: var(--accent);
+            transform: translateY(-2px);
         }
 
         /* ===========================
@@ -739,23 +769,24 @@
                 <div class="name-title">
                     <h1>Naphtali <span>Sunday</span></h1>
                     <div class="title">
-                        <i class="fas fa-chart-line"></i> Data Analyst · M&E Specialist
+                        <i class="fas fa-code"></i> Web Developer &middot; Data Analyst &middot; MEAL Specialist
                     </div>
                     <div class="badge-group">
                         <span class="badge"><i class="fas fa-map-pin"></i> Yola, Adamawa, Nigeria</span>
-                        <span class="badge"><i class="fas fa-clock"></i> 3+ Years Experience</span>
+                        <span class="badge"><i class="fas fa-clock"></i> 6+ Years Experience</span>
                         <span class="badge primary"><i class="fas fa-bolt"></i> Available</span>
-                        <span class="badge"><i class="fas fa-globe-africa"></i> USAID/PEPFAR</span>
+                        <span class="badge success"><i class="fas fa-globe-africa"></i> USAID/PEPFAR</span>
+                        <span class="badge"><i class="fas fa-code"></i> Full-Stack Developer</span>
                     </div>
                 </div>
             </div>
             <div class="hero-right">
                 <span class="availability"><i class="fas fa-circle"></i> Open to Work</span>
                 <div class="contact-links">
-                    <a href="mailto:naphtali.sunday@email.com"><i class="fas fa-envelope"></i> Email</a>
-                    <a href="#"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
-                    <a href="#"><i class="fab fa-github"></i> GitHub</a>
-                    <a href="#"><i class="fas fa-file-pdf"></i> Resume</a>
+                    <a href="mailto:naphtalisunday2944@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+                    <a href="https://www.linkedin.com/in/naphtali-sunday-aa6201244" target="_blank"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                    <a href="https://github.com/sundaymilly" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                    <a href="#" class="resume-btn" id="downloadResume"><i class="fas fa-file-pdf"></i> Resume</a>
                 </div>
             </div>
         </div>
@@ -765,8 +796,12 @@
         =========================== -->
         <div class="stats-grid">
             <div class="stat-card">
-                <div class="stat-number">3+</div>
+                <div class="stat-number">6+</div>
                 <div class="stat-label">Years Experience</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">100+</div>
+                <div class="stat-label">Trained Professionals</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number">99%</div>
@@ -775,10 +810,6 @@
             <div class="stat-card">
                 <div class="stat-number">20+</div>
                 <div class="stat-label">Field Sites</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">50+</div>
-                <div class="stat-label">Trained Professionals</div>
             </div>
         </div>
 
@@ -798,24 +829,32 @@
                     </div>
                     <div class="section-content">
                         <p class="about-text">
-                            <strong>Computer Science graduate</strong> with <strong>3+ years</strong> of experience
-                            supporting <strong>USAID/PEPFAR-funded</strong> health programs in
-                            <strong>Monitoring, Evaluation, and Data Management</strong> across Northeast Nigeria.
-                            Proven expertise in protection case management data systems, referral pathway tracking,
-                            and survivor-centered data documentation using <strong>LAMIS, DHIS2</strong>, and
-                            other health information platforms.
+                            I'm <strong>Naphtali Sunday</strong> — a <strong>Web Developer</strong>, <strong>Data Analyst</strong>,
+                            and <strong>MEAL Specialist</strong> with <strong>6+ years</strong> of experience building
+                            <span class="highlight">web applications</span>, <span class="highlight">data systems</span>,
+                            and leading <span class="highlight">capacity building</span> initiatives.
                         </p>
                         <p class="about-text mt-1">
-                            Demonstrated track record in <strong>data quality assurance</strong>, capacity building,
-                            and stakeholder coordination with government authorities, health facilities, and
-                            community structures. Passionate about leveraging data for evidence-based program
-                            improvement and donor compliance.
+                            I specialize in <strong>full-stack web development</strong> — building custom web apps,
+                            websites, and data-driven platforms. I've worked extensively with
+                            <strong>USAID/PEPFAR-funded</strong> health programs across Northeast Nigeria,
+                            managing data systems, ensuring <strong>99% data integrity</strong>, and training
+                            <strong>100+ professionals</strong> in data management and digital skills.
+                        </p>
+                        <p class="about-text mt-1">
+                            My work bridges the gap between <strong>technology and impact</strong> —
+                            from designing <strong>web-based restaurant systems</strong> to tracking
+                            <strong>HIV case management data</strong> with <strong>LAMIS</strong> and <strong>DHIS2</strong>.
+                            I'm passionate about using <span class="highlight">code</span> and <span class="highlight">data</span>
+                            to solve real-world problems in <strong>health, education, and development</strong>.
                         </p>
                         <div class="about-highlights">
+                            <span class="highlight-item"><i class="fas fa-check-circle"></i> Full-Stack Web Developer</span>
                             <span class="highlight-item"><i class="fas fa-check-circle"></i> USAID/PEPFAR Experience</span>
-                            <span class="highlight-item"><i class="fas fa-check-circle"></i> LAMIS &amp; DHIS2 Expert</span>
-                            <span class="highlight-item"><i class="fas fa-check-circle"></i> Data Quality Assurance</span>
-                            <span class="highlight-item"><i class="fas fa-check-circle"></i> Capacity Building</span>
+                            <span class="highlight-item"><i class="fas fa-check-circle"></i> 100+ Professionals Trained</span>
+                            <span class="highlight-item"><i class="fas fa-check-circle"></i> MEAL &amp; Data Systems Expert</span>
+                            <span class="highlight-item"><i class="fas fa-check-circle"></i> LAMIS &amp; DHIS2 Specialist</span>
+                            <span class="highlight-item"><i class="fas fa-check-circle"></i> NGO &amp; Development Sector</span>
                         </div>
                     </div>
                 </div>
@@ -828,7 +867,21 @@
                     </div>
                     <div class="section-content">
                         <div class="skill-category">
-                            <span class="cat-label">MEAL &amp; Data Systems</span>
+                            <span class="cat-label">Web Development</span>
+                            <div class="skillset">
+                                <span class="skill-tag">HTML5</span>
+                                <span class="skill-tag">CSS3</span>
+                                <span class="skill-tag">JavaScript</span>
+                                <span class="skill-tag">PHP</span>
+                                <span class="skill-tag">MySQL</span>
+                                <span class="skill-tag">React</span>
+                                <span class="skill-tag">Node.js</span>
+                                <span class="skill-tag">Bootstrap</span>
+                                <span class="skill-tag">REST APIs</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <span class="cat-label">Data &amp; MEAL Systems</span>
                             <div class="skillset">
                                 <span class="skill-tag">LAMIS</span>
                                 <span class="skill-tag">DHIS2</span>
@@ -851,13 +904,13 @@
                             </div>
                         </div>
                         <div class="skill-category">
-                            <span class="cat-label">Software &amp; Development</span>
+                            <span class="cat-label">Tools &amp; Design</span>
                             <div class="skillset">
-                                <span class="skill-tag">Web Development</span>
                                 <span class="skill-tag">UI/UX Design</span>
                                 <span class="skill-tag">Adobe Photoshop</span>
-                                <span class="skill-tag">MS Office Suite</span>
-                                <span class="skill-tag">Database Management</span>
+                                <span class="skill-tag">Microsoft Office Suite</span>
+                                <span class="skill-tag">Git</span>
+                                <span class="skill-tag">Figma</span>
                             </div>
                         </div>
                     </div>
@@ -879,7 +932,7 @@
                             <div class="entry-desc" style="list-style:none;padding-left:0;margin-top:2px;">
                                 <span style="font-size:13px;color:var(--text-secondary);">
                                     <i class="fas fa-star" style="color:var(--accent);font-size:11px;"></i>
-                                    Final Year Project: Web-based Integrated Restaurant System
+                                    Final Year Project: <strong>Web-based Integrated Restaurant System</strong>
                                 </span>
                             </div>
                         </div>
@@ -956,6 +1009,27 @@
                                 <span>SQL</span>
                                 <span>Data Quality</span>
                                 <span>Donor Reporting</span>
+                            </div>
+                        </div>
+
+                        <div class="entry">
+                            <div class="entry-header">
+                                <span class="entry-title">Web Developer &amp; Data Analyst</span>
+                                <span class="entry-date">2021 – Present</span>
+                            </div>
+                            <div class="entry-org">Freelance &amp; Contract Projects</div>
+                            <ul class="entry-desc">
+                                <li>Built custom <strong>web applications</strong> and websites for clients across various sectors.</li>
+                                <li>Designed and deployed a <strong>Web-based Integrated Restaurant System</strong> as a final-year project.</li>
+                                <li>Developed data-driven platforms with <strong>SQL</strong> and <strong>PHP</strong> for real-time reporting.</li>
+                                <li>Created <strong>interactive dashboards</strong> using modern frontend technologies.</li>
+                            </ul>
+                            <div class="entry-tags">
+                                <span>PHP</span>
+                                <span>MySQL</span>
+                                <span>JavaScript</span>
+                                <span>React</span>
+                                <span>APIs</span>
                             </div>
                         </div>
 
@@ -1048,9 +1122,37 @@
                         <div class="achievement-item">
                             <div class="ach-title"><i class="fas fa-users"></i> Capacity Building &amp; Training</div>
                             <div class="ach-desc">
-                                Successfully trained <strong>50+ individuals</strong> across various cohorts in computer
-                                literacy, graphic design, and programming.
+                                Successfully trained <strong>100+ individuals</strong> across various cohorts in computer
+                                literacy, graphic design, programming, and data management.
                             </div>
+                        </div>
+                        <div class="achievement-item">
+                            <div class="ach-title"><i class="fas fa-handshake"></i> Regulatory Compliance &amp; Client Retention</div>
+                            <div class="ach-desc">
+                                Maintained <strong>100% compliance</strong> with industry regulations while achieving a
+                                <strong>85% client retention</strong> rate.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LANGUAGES -->
+                <div class="section">
+                    <div class="section-header">
+                        <div class="icon"><i class="fas fa-language"></i></div>
+                        <h2>Languages</h2>
+                    </div>
+                    <div class="section-content">
+                        <div style="display:flex;flex-wrap:wrap;gap:12px;">
+                            <span style="display:flex;align-items:center;gap:6px;font-size:14px;font-weight:500;">
+                                🇬🇧 English <span style="font-size:11px;color:var(--text-muted);font-weight:400;">(Professional)</span>
+                            </span>
+                            <span style="display:flex;align-items:center;gap:6px;font-size:14px;font-weight:500;">
+                                🇳🇬 Hausa <span style="font-size:11px;color:var(--text-muted);font-weight:400;">(Native)</span>
+                            </span>
+                            <span style="display:flex;align-items:center;gap:6px;font-size:14px;font-weight:500;">
+                                🇳🇬 Fulfulde <span style="font-size:11px;color:var(--text-muted);font-weight:400;">(Native)</span>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -1066,20 +1168,145 @@
         =========================== -->
         <div class="footer">
             <div class="left">
-                <span><i class="fas fa-database"></i> Data-driven · Insight-focused</span>
-                <span><i class="far fa-calendar-alt"></i> Available for opportunities</span>
+                <span><i class="fas fa-code"></i> Web Developer · Data Analyst · MEAL Specialist</span>
+                <span><i class="far fa-calendar-alt"></i> 6+ years experience</span>
                 <span><i class="fas fa-map-pin"></i> Yola, Adamawa</span>
             </div>
             <div class="right">
-                <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#"><i class="fab fa-github"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-medium"></i></a>
+                <a href="https://www.linkedin.com/in/naphtali-sunday-aa6201244" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/sundaymilly" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Medium"><i class="fab fa-medium"></i></a>
             </div>
         </div>
 
     </div>
     <!-- end container -->
+
+    <script>
+        // ===========================
+        // RESUME DOWNLOAD FUNCTIONALITY
+        // ===========================
+        document.getElementById('downloadResume').addEventListener('click', function(e) {
+            e.preventDefault();
+
+            // Create resume content
+            const resumeContent = `
+                NAPHTALI SUNDAY
+                Web Developer · Data Analyst · MEAL Specialist
+                Yola, Adamawa, Nigeria
+                naphtalisunday2944@gmail.com
+                LinkedIn: linkedin.com/in/naphtali-sunday-aa6201244
+                GitHub: github.com/sundaymilly
+
+                ============================================================
+                PROFESSIONAL SUMMARY
+                ============================================================
+                A versatile Computer Science graduate with over 6 years of experience
+                as a Web Developer, Data Analyst, and MEAL Specialist. Proven expertise
+                in full-stack web development, data management systems, and capacity
+                building. Experience supporting USAID/PEPFAR-funded health programs
+                across Northeast Nigeria. Strong background in LAMIS, DHIS2, SQL,
+                and web application development.
+
+                ============================================================
+                KEY SKILLS
+                ============================================================
+                Web Development:      HTML5, CSS3, JavaScript, PHP, MySQL, React,
+                                      Node.js, Bootstrap, REST APIs
+                Data & MEAL Systems:  LAMIS, DHIS2, SQL, Data Quality Assurance,
+                                      Indicator Tracking, Donor Reporting
+                Capacity Building:    Training Facilitation, Coaching, Mentorship,
+                                      Community Engagement, Report Writing
+                Tools & Design:       UI/UX Design, Adobe Photoshop, MS Office, Git
+
+                ============================================================
+                PROFESSIONAL EXPERIENCE
+                ============================================================
+
+                M&E Assistant/DEC
+                Society for Family Health (SFH) · USAID/PEPFAR CARE 2 Project
+                2022 – Present
+                • Oversee HIV case management data systems using LAMIS and DHIS2
+                • Lead data management for 20+ field sites with 99% data completeness
+                • Track referral, linkage, retention, and adherence data
+                • Facilitate monthly data review meetings
+                • Generate donor reports for USAID/PEPFAR
+
+                Web Developer & Data Analyst
+                Freelance & Contract Projects
+                2021 – Present
+                • Built custom web applications and websites
+                • Designed Web-based Integrated Restaurant System
+                • Developed data-driven platforms with SQL and PHP
+
+                Financial Advisor
+                Heirs Life Assurance · UBA Bank, Yola
+                2020 – 2021
+                • Conducted financial consultations for 100+ clients
+                • Achieved 85% client retention rate
+                • Maintained 100% compliance with regulations
+
+                Classroom Teacher (NYSC)
+                LCCN No:1 Academy School, Yola
+                2019 – 2020
+                • Integrated digital tools into curriculum
+                • Achieved 20% improvement in student test scores
+
+                Computer Operator / Graphic Designer
+                Isme Cybercafe, Jalingo
+                2017 – 2019
+                • Managed data entry and database maintenance
+                • Produced operational reports
+
+                ============================================================
+                EDUCATION
+                ============================================================
+                B.Sc. Computer Science
+                Taraba State University, Jalingo
+                2017 – 2022
+                Final Year Project: Web-based Integrated Restaurant System
+
+                ============================================================
+                CERTIFICATIONS
+                ============================================================
+                SQL - Society for Family Health (2025)
+                Diploma in Ethical Hacking - Alison (2022)
+                How to Prevent E-waste - UNITAR (2022)
+                Microsoft Packages & Graphic Design - 360Techworld (2022)
+
+                ============================================================
+                KEY ACHIEVEMENTS
+                ============================================================
+                • 99% Data Integrity: Improved data completeness from 85% to 99%
+                • 20% Student Improvement: Technology-enhanced learning impact
+                • Web-based Restaurant System: Full-stack development project
+                • 100+ Trained Professionals: Capacity building across cohorts
+                • 85% Client Retention: Financial advisory excellence
+
+                ============================================================
+                LANGUAGES
+                ============================================================
+                English (Professional) · Hausa (Native) · Fulfulde (Native)
+
+                ============================================================
+                REFERENCES
+                ============================================================
+                Available upon request.
+            `;
+
+            // Create blob and download
+            const blob = new Blob([resumeContent], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'Naphtali_Sunday_Resume.txt';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        });
+    </script>
 
 </body>
 </html>
