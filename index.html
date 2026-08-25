@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>John Doe · Senior Data Analyst</title>
+    <title>Naphtali Sunday · Data Analyst & M&E Specialist</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <style>
         /* ===========================
-                   CSS VARIABLES & RESET
-                =========================== */
+           CSS VARIABLES & RESET
+        =========================== */
         :root {
             --primary: #0f172a;
             --primary-light: #1e293b;
-            --accent: #2563eb;
-            --accent-light: #3b82f6;
-            --accent-gradient: linear-gradient(135deg, #2563eb, #7c3aed);
+            --accent: #1a5a8c;
+            --accent-light: #2a7abf;
+            --accent-gradient: linear-gradient(135deg, #1a5a8c, #2a7abf);
             --bg: #f8fafc;
             --surface: #ffffff;
             --surface-dark: #f1f5f9;
@@ -57,8 +57,8 @@
         }
 
         /* ===========================
-                   HEADER / HERO
-                =========================== */
+           HEADER / HERO
+        =========================== */
         .hero {
             display: flex;
             align-items: center;
@@ -85,10 +85,10 @@
             align-items: center;
             justify-content: center;
             color: #fff;
-            font-size: 36px;
+            font-size: 28px;
             font-weight: 800;
             flex-shrink: 0;
-            box-shadow: 0 8px 24px rgba(37, 99, 235, 0.25);
+            box-shadow: 0 8px 24px rgba(26, 90, 140, 0.25);
             position: relative;
         }
 
@@ -197,7 +197,7 @@
             background: var(--accent);
             color: #fff;
             transform: translateY(-2px);
-            box-shadow: 0 4px 16px rgba(37, 99, 235, 0.3);
+            box-shadow: 0 4px 16px rgba(26, 90, 140, 0.3);
         }
 
         .contact-links a i {
@@ -205,8 +205,8 @@
         }
 
         /* ===========================
-                   GRID LAYOUT
-                =========================== */
+           GRID LAYOUT
+        =========================== */
         .grid-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -214,8 +214,8 @@
         }
 
         /* ===========================
-                   SECTION STYLES
-                =========================== */
+           SECTION STYLES
+        =========================== */
         .section {
             margin-bottom: 32px;
         }
@@ -257,8 +257,8 @@
         }
 
         /* ===========================
-                   ABOUT
-                =========================== */
+           ABOUT
+        =========================== */
         .about-text {
             font-size: 15px;
             color: var(--text-secondary);
@@ -291,10 +291,10 @@
         }
 
         /* ===========================
-                   SKILLS
-                =========================== */
+           SKILLS
+        =========================== */
         .skill-category {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .skill-category:last-child {
@@ -346,8 +346,8 @@
         }
 
         /* ===========================
-                   EXPERIENCE / EDUCATION
-                =========================== */
+           EXPERIENCE / EDUCATION
+        =========================== */
         .entry {
             padding: 14px 16px;
             background: var(--surface-dark);
@@ -437,27 +437,27 @@
         }
 
         /* ===========================
-                   PROJECTS
-                =========================== */
-        .project-item {
+           ACHIEVEMENTS
+        =========================== */
+        .achievement-item {
             background: var(--surface-dark);
-            padding: 16px 18px;
+            padding: 14px 16px;
             border-radius: var(--radius-sm);
             margin-bottom: 10px;
-            border-left: 3px solid var(--accent);
+            border-left: 3px solid #22c55e;
             transition: var(--transition);
         }
 
-        .project-item:hover {
+        .achievement-item:hover {
             transform: translateX(4px);
             box-shadow: var(--shadow);
         }
 
-        .project-item:last-child {
+        .achievement-item:last-child {
             margin-bottom: 0;
         }
 
-        .project-item .proj-title {
+        .achievement-item .ach-title {
             font-weight: 700;
             font-size: 14px;
             display: flex;
@@ -465,46 +465,19 @@
             gap: 6px;
         }
 
-        .project-item .proj-desc {
+        .achievement-item .ach-title i {
+            color: #22c55e;
+        }
+
+        .achievement-item .ach-desc {
             font-size: 13px;
             color: var(--text-secondary);
             margin-top: 2px;
         }
 
-        .project-item .proj-tech {
-            margin-top: 6px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4px;
-        }
-
-        .project-item .proj-tech span {
-            font-size: 10px;
-            background: var(--surface);
-            padding: 1px 10px;
-            border-radius: 12px;
-            font-weight: 600;
-            color: var(--text-muted);
-        }
-
-        .project-item .proj-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 12px;
-            color: var(--accent);
-            text-decoration: none;
-            font-weight: 500;
-            margin-top: 4px;
-        }
-
-        .project-item .proj-link:hover {
-            text-decoration: underline;
-        }
-
         /* ===========================
-                   CERTIFICATIONS
-                =========================== */
+           CERTIFICATIONS
+        =========================== */
         .cert-item {
             display: flex;
             align-items: center;
@@ -544,8 +517,8 @@
         }
 
         /* ===========================
-                   STATS / METRICS
-                =========================== */
+           STATS / METRICS
+        =========================== */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -582,8 +555,8 @@
         }
 
         /* ===========================
-                   FOOTER
-                =========================== */
+           FOOTER
+        =========================== */
         .footer {
             margin-top: 36px;
             padding-top: 24px;
@@ -624,8 +597,8 @@
         }
 
         /* ===========================
-                   RESPONSIVE
-                =========================== */
+           RESPONSIVE
+        =========================== */
         @media (max-width: 900px) {
             .container {
                 padding: 32px 28px;
@@ -667,7 +640,7 @@
             .avatar {
                 width: 72px;
                 height: 72px;
-                font-size: 28px;
+                font-size: 22px;
             }
             .name-title h1 {
                 font-size: 24px;
@@ -714,8 +687,8 @@
         }
 
         /* ===========================
-                   UTILITY
-                =========================== */
+           UTILITY
+        =========================== */
         .text-muted {
             color: var(--text-muted);
         }
@@ -748,27 +721,6 @@
         .text-center {
             text-align: center;
         }
-
-        /* Scrollable sections if content grows */
-        .scrollable {
-            max-height: 400px;
-            overflow-y: auto;
-            padding-right: 4px;
-        }
-
-        .scrollable::-webkit-scrollbar {
-            width: 4px;
-        }
-
-        .scrollable::-webkit-scrollbar-track {
-            background: var(--surface-dark);
-            border-radius: 10px;
-        }
-
-        .scrollable::-webkit-scrollbar-thumb {
-            background: var(--accent);
-            border-radius: 10px;
-        }
     </style>
 </head>
 <body>
@@ -781,25 +733,26 @@
         <div class="hero">
             <div class="hero-left">
                 <div class="avatar">
-                    JD
+                    NS
                     <span class="status-dot"></span>
                 </div>
                 <div class="name-title">
-                    <h1>John <span>Doe</span></h1>
+                    <h1>Naphtali <span>Sunday</span></h1>
                     <div class="title">
-                        <i class="fas fa-chart-line"></i> Senior Data Analyst · BI Developer
+                        <i class="fas fa-chart-line"></i> Data Analyst · M&E Specialist
                     </div>
                     <div class="badge-group">
-                        <span class="badge"><i class="fas fa-map-pin"></i> Lagos, Nigeria</span>
-                        <span class="badge"><i class="fas fa-clock"></i> 5+ Years Experience</span>
+                        <span class="badge"><i class="fas fa-map-pin"></i> Yola, Adamawa, Nigeria</span>
+                        <span class="badge"><i class="fas fa-clock"></i> 3+ Years Experience</span>
                         <span class="badge primary"><i class="fas fa-bolt"></i> Available</span>
+                        <span class="badge"><i class="fas fa-globe-africa"></i> USAID/PEPFAR</span>
                     </div>
                 </div>
             </div>
             <div class="hero-right">
                 <span class="availability"><i class="fas fa-circle"></i> Open to Work</span>
                 <div class="contact-links">
-                    <a href="mailto:john@data.com"><i class="fas fa-envelope"></i> Email</a>
+                    <a href="mailto:naphtali.sunday@email.com"><i class="fas fa-envelope"></i> Email</a>
                     <a href="#"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
                     <a href="#"><i class="fab fa-github"></i> GitHub</a>
                     <a href="#"><i class="fas fa-file-pdf"></i> Resume</a>
@@ -812,20 +765,20 @@
         =========================== -->
         <div class="stats-grid">
             <div class="stat-card">
-                <div class="stat-number">5+</div>
+                <div class="stat-number">3+</div>
                 <div class="stat-label">Years Experience</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">24</div>
-                <div class="stat-label">Projects Delivered</div>
+                <div class="stat-number">99%</div>
+                <div class="stat-label">Data Integrity</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">12+</div>
-                <div class="stat-label">Companies Worked With</div>
+                <div class="stat-number">20+</div>
+                <div class="stat-label">Field Sites</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">98%</div>
-                <div class="stat-label">Client Satisfaction</div>
+                <div class="stat-number">50+</div>
+                <div class="stat-label">Trained Professionals</div>
             </div>
         </div>
 
@@ -845,16 +798,24 @@
                     </div>
                     <div class="section-content">
                         <p class="about-text">
-                            <strong>Data Analyst</strong> with <strong>5+ years</strong> of experience turning
-                            complex data into actionable insights. I bridge the gap between raw data and
-                            business decisions using <strong>SQL, Python, and BI tools</strong>.
-                            Passionate about storytelling with data and driving <strong>data-driven culture</strong>.
+                            <strong>Computer Science graduate</strong> with <strong>3+ years</strong> of experience
+                            supporting <strong>USAID/PEPFAR-funded</strong> health programs in
+                            <strong>Monitoring, Evaluation, and Data Management</strong> across Northeast Nigeria.
+                            Proven expertise in protection case management data systems, referral pathway tracking,
+                            and survivor-centered data documentation using <strong>LAMIS, DHIS2</strong>, and
+                            other health information platforms.
+                        </p>
+                        <p class="about-text mt-1">
+                            Demonstrated track record in <strong>data quality assurance</strong>, capacity building,
+                            and stakeholder coordination with government authorities, health facilities, and
+                            community structures. Passionate about leveraging data for evidence-based program
+                            improvement and donor compliance.
                         </p>
                         <div class="about-highlights">
-                            <span class="highlight-item"><i class="fas fa-check-circle"></i> 5+ years experience</span>
-                            <span class="highlight-item"><i class="fas fa-check-circle"></i> 24+ projects completed</span>
-                            <span class="highlight-item"><i class="fas fa-check-circle"></i> 12+ industries served</span>
-                            <span class="highlight-item"><i class="fas fa-check-circle"></i> Remote &amp; on-site</span>
+                            <span class="highlight-item"><i class="fas fa-check-circle"></i> USAID/PEPFAR Experience</span>
+                            <span class="highlight-item"><i class="fas fa-check-circle"></i> LAMIS &amp; DHIS2 Expert</span>
+                            <span class="highlight-item"><i class="fas fa-check-circle"></i> Data Quality Assurance</span>
+                            <span class="highlight-item"><i class="fas fa-check-circle"></i> Capacity Building</span>
                         </div>
                     </div>
                 </div>
@@ -867,35 +828,36 @@
                     </div>
                     <div class="section-content">
                         <div class="skill-category">
-                            <span class="cat-label">Programming &amp; Databases</span>
+                            <span class="cat-label">MEAL &amp; Data Systems</span>
                             <div class="skillset">
-                                <span class="skill-tag">SQL <span class="level">(Expert)</span></span>
-                                <span class="skill-tag">Python <span class="level">(Advanced)</span></span>
-                                <span class="skill-tag">Pandas</span>
-                                <span class="skill-tag">NumPy</span>
-                                <span class="skill-tag">BigQuery</span>
-                                <span class="skill-tag">PostgreSQL</span>
+                                <span class="skill-tag">LAMIS</span>
+                                <span class="skill-tag">DHIS2</span>
+                                <span class="skill-tag">SQL</span>
+                                <span class="skill-tag">Data Quality Assurance</span>
+                                <span class="skill-tag">Indicator Tracking</span>
+                                <span class="skill-tag">Donor Reporting</span>
+                                <span class="skill-tag">Strategic Information</span>
+                                <span class="skill-tag">ETL Processes</span>
                             </div>
                         </div>
                         <div class="skill-category">
-                            <span class="cat-label">BI &amp; Visualization</span>
+                            <span class="cat-label">Capacity Building</span>
                             <div class="skillset">
-                                <span class="skill-tag">Power BI</span>
-                                <span class="skill-tag">Tableau</span>
-                                <span class="skill-tag">Looker</span>
-                                <span class="skill-tag">Metabase</span>
-                                <span class="skill-tag">Excel</span>
+                                <span class="skill-tag">Training Facilitation</span>
+                                <span class="skill-tag">Coaching &amp; Mentorship</span>
+                                <span class="skill-tag">Community Engagement</span>
+                                <span class="skill-tag">Stakeholder Coordination</span>
+                                <span class="skill-tag">Report Writing</span>
                             </div>
                         </div>
                         <div class="skill-category">
-                            <span class="cat-label">Tools &amp; Platforms</span>
+                            <span class="cat-label">Software &amp; Development</span>
                             <div class="skillset">
-                                <span class="skill-tag">Airflow</span>
-                                <span class="skill-tag">dbt</span>
-                                <span class="skill-tag">Git</span>
-                                <span class="skill-tag">Docker</span>
-                                <span class="skill-tag">AWS</span>
-                                <span class="skill-tag">GCP</span>
+                                <span class="skill-tag">Web Development</span>
+                                <span class="skill-tag">UI/UX Design</span>
+                                <span class="skill-tag">Adobe Photoshop</span>
+                                <span class="skill-tag">MS Office Suite</span>
+                                <span class="skill-tag">Database Management</span>
                             </div>
                         </div>
                     </div>
@@ -910,27 +872,14 @@
                     <div class="section-content">
                         <div class="entry">
                             <div class="entry-header">
-                                <span class="entry-title">M.Sc. Data Science</span>
-                                <span class="entry-date">2020 – 2022</span>
+                                <span class="entry-title">B.Sc. Computer Science</span>
+                                <span class="entry-date">2017 – 2022</span>
                             </div>
-                            <div class="entry-org">University of Lagos</div>
+                            <div class="entry-org">Taraba State University, Jalingo</div>
                             <div class="entry-desc" style="list-style:none;padding-left:0;margin-top:2px;">
                                 <span style="font-size:13px;color:var(--text-secondary);">
                                     <i class="fas fa-star" style="color:var(--accent);font-size:11px;"></i>
-                                    Thesis: Predictive Modeling for Customer Churn in Telecom
-                                </span>
-                            </div>
-                        </div>
-                        <div class="entry">
-                            <div class="entry-header">
-                                <span class="entry-title">B.Sc. Statistics</span>
-                                <span class="entry-date">2015 – 2019</span>
-                            </div>
-                            <div class="entry-org">University of Ibadan</div>
-                            <div class="entry-desc" style="list-style:none;padding-left:0;margin-top:2px;">
-                                <span style="font-size:13px;color:var(--text-secondary);">
-                                    <i class="fas fa-star" style="color:var(--accent);font-size:11px;"></i>
-                                    First Class Honours · GPA: 4.8/5.0
+                                    Final Year Project: Web-based Integrated Restaurant System
                                 </span>
                             </div>
                         </div>
@@ -946,27 +895,27 @@
                     <div class="section-content">
                         <div class="cert-item">
                             <i class="fas fa-badge-check"></i>
-                            <span>Google Data Analytics Professional</span>
-                            <span class="cert-org">Google</span>
+                            <span>Structured Query Language (SQL)</span>
+                            <span class="cert-org">Society for Family Health</span>
+                            <span class="cert-date">2025</span>
+                        </div>
+                        <div class="cert-item">
+                            <i class="fas fa-badge-check"></i>
+                            <span>Diploma in Ethical Hacking</span>
+                            <span class="cert-org">Alison Online Learning Institute</span>
                             <span class="cert-date">2022</span>
                         </div>
                         <div class="cert-item">
                             <i class="fas fa-badge-check"></i>
-                            <span>Microsoft Power BI Data Analyst</span>
-                            <span class="cert-org">Microsoft</span>
-                            <span class="cert-date">2021</span>
+                            <span>How to Prevent E-waste</span>
+                            <span class="cert-org">UNITAR</span>
+                            <span class="cert-date">2022</span>
                         </div>
                         <div class="cert-item">
                             <i class="fas fa-badge-check"></i>
-                            <span>Python for Data Science</span>
-                            <span class="cert-org">IBM</span>
-                            <span class="cert-date">2020</span>
-                        </div>
-                        <div class="cert-item">
-                            <i class="fas fa-badge-check"></i>
-                            <span>AWS Cloud Practitioner</span>
-                            <span class="cert-org">Amazon</span>
-                            <span class="cert-date">2023</span>
+                            <span>Microsoft Packages &amp; Graphic Design</span>
+                            <span class="cert-org">360Techworld</span>
+                            <span class="cert-date">2022</span>
                         </div>
                     </div>
                 </div>
@@ -984,152 +933,124 @@
                         <h2>Experience</h2>
                     </div>
                     <div class="section-content">
+
                         <div class="entry">
                             <div class="entry-header">
-                                <span class="entry-title">Senior Data Analyst</span>
+                                <span class="entry-title">M&E Assistant/DEC</span>
                                 <span class="entry-date">2022 – Present</span>
                             </div>
-                            <div class="entry-org">FinTech Co. · Lagos</div>
+                            <div class="entry-org">Society for Family Health (SFH) · USAID/PEPFAR CARE 2 Project</div>
                             <ul class="entry-desc">
-                                <li>Built dashboards tracking <strong>₦2B+</strong> in transaction volume, reducing reporting time by <strong>60%</strong>.</li>
-                                <li>Developed churn prediction model (<strong>85% accuracy</strong>) using Python &amp; XGBoost.</li>
-                                <li>Led a team of 3 analysts; designed ETL pipelines with Airflow &amp; BigQuery.</li>
-                                <li>Reduced data processing time by 40% through query optimization.</li>
+                                <li>Provide technical oversight for HIV case management data systems using <strong>LAMIS</strong> and <strong>DHIS2</strong>.</li>
+                                <li>Lead end-to-end data management for <strong>20+ field sites</strong>, achieving <strong>99% data completeness</strong>.</li>
+                                <li>Track referral, linkage, retention, and adherence data to assess program performance.</li>
+                                <li>Strengthen referral pathway documentation for GBV survivors and vulnerable populations.</li>
+                                <li>Facilitate monthly data review meetings translating complex data into actionable insights.</li>
+                                <li>Provide hands-on coaching on data management and ethical case documentation.</li>
+                                <li>Generate monthly, quarterly, and donor reports for <strong>USAID/PEPFAR</strong>.</li>
+                                <li>Support Strategic Information meetings and performance monitoring activities.</li>
                             </ul>
                             <div class="entry-tags">
-                                <span>Python</span>
-                                <span>BigQuery</span>
-                                <span>Airflow</span>
-                                <span>Power BI</span>
+                                <span>LAMIS</span>
+                                <span>DHIS2</span>
+                                <span>SQL</span>
+                                <span>Data Quality</span>
+                                <span>Donor Reporting</span>
                             </div>
                         </div>
 
                         <div class="entry">
                             <div class="entry-header">
-                                <span class="entry-title">Data Analyst</span>
-                                <span class="entry-date">2019 – 2022</span>
+                                <span class="entry-title">Financial Advisor</span>
+                                <span class="entry-date">2020 – 2021</span>
                             </div>
-                            <div class="entry-org">Retail Analytics · Remote</div>
+                            <div class="entry-org">Heirs Life Assurance · UBA Bank, Yola</div>
                             <ul class="entry-desc">
-                                <li>Increased sales by <strong>12%</strong> by optimizing inventory using time-series forecasting.</li>
-                                <li>Built Tableau dashboards for 20+ stores, used by <strong>50+ managers</strong> daily.</li>
-                                <li>Automated weekly reporting, saving <strong>10+ hours</strong> per week.</li>
-                                <li>Implemented A/B testing framework resulting in 8% conversion lift.</li>
+                                <li>Conducted financial consultations for <strong>100+ clients</strong>, developing tailored insurance plans.</li>
+                                <li>Maintained deep knowledge of life, health, and property insurance products.</li>
+                                <li>Achieved <strong>85% client retention</strong> rate.</li>
+                                <li>Maintained <strong>100% compliance</strong> with industry regulations.</li>
                             </ul>
                             <div class="entry-tags">
-                                <span>Tableau</span>
-                                <span>SQL</span>
-                                <span>Python</span>
-                                <span>A/B Testing</span>
+                                <span>Financial Analysis</span>
+                                <span>Client Relations</span>
+                                <span>Compliance</span>
                             </div>
                         </div>
 
                         <div class="entry">
                             <div class="entry-header">
-                                <span class="entry-title">Junior Data Analyst</span>
-                                <span class="entry-date">2018 – 2019</span>
+                                <span class="entry-title">Classroom Teacher (NYSC)</span>
+                                <span class="entry-date">2019 – 2020</span>
                             </div>
-                            <div class="entry-org">HealthTech Startup · Lagos</div>
+                            <div class="entry-org">LCCN No:1 Academy School, Yola</div>
                             <ul class="entry-desc">
-                                <li>Analyzed patient data to identify treatment effectiveness trends.</li>
-                                <li>Built interactive dashboards for clinical trial monitoring.</li>
-                                <li>Maintained and optimized data pipelines for 10+ data sources.</li>
+                                <li>Integrated digital tools into curriculum, enhancing student engagement.</li>
+                                <li>Designed assessments to monitor progress and tailor instructional strategies.</li>
+                                <li>Achieved <strong>20% improvement</strong> in student test scores.</li>
                             </ul>
                             <div class="entry-tags">
-                                <span>SQL</span>
-                                <span>Excel</span>
-                                <span>Metabase</span>
+                                <span>Teaching</span>
+                                <span>Digital Tools</span>
+                                <span>Student Mentoring</span>
                             </div>
                         </div>
+
+                        <div class="entry">
+                            <div class="entry-header">
+                                <span class="entry-title">Computer Operator / Graphic Designer</span>
+                                <span class="entry-date">2017 – 2019</span>
+                            </div>
+                            <div class="entry-org">Isme Cybercafe, Jalingo</div>
+                            <ul class="entry-desc">
+                                <li>Managed data entry and database maintenance with strict data privacy protocols.</li>
+                                <li>Produced operational reports and error logs.</li>
+                                <li>Delivered graphic design services for clients.</li>
+                            </ul>
+                            <div class="entry-tags">
+                                <span>Data Entry</span>
+                                <span>Graphic Design</span>
+                                <span>Reporting</span>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
-                <!-- PROJECTS -->
+                <!-- ACHIEVEMENTS -->
                 <div class="section">
                     <div class="section-header">
-                        <div class="icon"><i class="fas fa-folder-open"></i></div>
-                        <h2>Featured Projects</h2>
+                        <div class="icon"><i class="fas fa-trophy"></i></div>
+                        <h2>Key Achievements</h2>
                     </div>
                     <div class="section-content">
-                        <div class="project-item">
-                            <div class="proj-title">📈 Customer Churn Dashboard</div>
-                            <div class="proj-desc">
-                                Interactive Power BI dashboard predicting churn risk with <strong>88% accuracy</strong>.
-                                Used by retention team to target at-risk customers proactively.
+                        <div class="achievement-item">
+                            <div class="ach-title"><i class="fas fa-check-circle"></i> 99% Data Integrity Achievement</div>
+                            <div class="ach-desc">
+                                Spearheaded data quality improvement initiatives across <strong>20+ field sites</strong>,
+                                elevating data completeness from <strong>85% to 99%</strong>.
                             </div>
-                            <div class="proj-tech">
-                                <span>Power BI</span>
-                                <span>SQL</span>
-                                <span>DAX</span>
-                                <span>Python</span>
-                            </div>
-                            <a href="#" class="proj-link"><i class="fas fa-external-link-alt"></i> View Demo</a>
                         </div>
-
-                        <div class="project-item">
-                            <div class="proj-title">🛒 E‑commerce Sales Analysis</div>
-                            <div class="proj-desc">
-                                End‑to‑end analysis of <strong>500K+</strong> transactions. Identified top products
-                                and seasonal trends, driving a <strong>15%</strong> increase in revenue.
+                        <div class="achievement-item">
+                            <div class="ach-title"><i class="fas fa-graduation-cap"></i> Technology-Enhanced Learning Impact</div>
+                            <div class="ach-desc">
+                                Introduced technology-driven teaching tools leading to a <strong>20% improvement</strong>
+                                in average student test scores.
                             </div>
-                            <div class="proj-tech">
-                                <span>Python</span>
-                                <span>Pandas</span>
-                                <span>Plotly</span>
-                                <span>SQL</span>
-                            </div>
-                            <a href="#" class="proj-link"><i class="fab fa-github"></i> Source Code</a>
                         </div>
-
-                        <div class="project-item">
-                            <div class="proj-title">🌦️ Weather &amp; Sales Correlation</div>
-                            <div class="proj-desc">
-                                Analyzed 5 years of weather data to optimize inventory for seasonal products.
-                                Forecast accuracy improved by <strong>22%</strong>.
+                        <div class="achievement-item">
+                            <div class="ach-title"><i class="fas fa-code"></i> End-to-End System Development</div>
+                            <div class="ach-desc">
+                                Designed and deployed a fully functional <strong>"Web-based Integrated Restaurant System"</strong>
+                                as a final-year project.
                             </div>
-                            <div class="proj-tech">
-                                <span>SQL</span>
-                                <span>Python</span>
-                                <span>Tableau</span>
-                                <span>BigQuery</span>
-                            </div>
-                            <a href="#" class="proj-link"><i class="fas fa-external-link-alt"></i> View Dashboard</a>
                         </div>
-
-                        <div class="project-item">
-                            <div class="proj-title">📊 Real‑Time Sales Monitor</div>
-                            <div class="proj-desc">
-                                Built a real‑time sales monitoring dashboard using <strong>WebSockets</strong> and
-                                <strong>D3.js</strong>. Used by executives for live performance tracking.
+                        <div class="achievement-item">
+                            <div class="ach-title"><i class="fas fa-users"></i> Capacity Building &amp; Training</div>
+                            <div class="ach-desc">
+                                Successfully trained <strong>50+ individuals</strong> across various cohorts in computer
+                                literacy, graphic design, and programming.
                             </div>
-                            <div class="proj-tech">
-                                <span>Python</span>
-                                <span>WebSockets</span>
-                                <span>D3.js</span>
-                                <span>Redis</span>
-                            </div>
-                            <a href="#" class="proj-link"><i class="fas fa-external-link-alt"></i> View Demo</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- LANGUAGES -->
-                <div class="section">
-                    <div class="section-header">
-                        <div class="icon"><i class="fas fa-language"></i></div>
-                        <h2>Languages</h2>
-                    </div>
-                    <div class="section-content">
-                        <div style="display:flex;flex-wrap:wrap;gap:12px;">
-                            <span style="display:flex;align-items:center;gap:6px;font-size:14px;font-weight:500;">
-                                🇬🇧 English <span style="font-size:11px;color:var(--text-muted);font-weight:400;">(Native)</span>
-                            </span>
-                            <span style="display:flex;align-items:center;gap:6px;font-size:14px;font-weight:500;">
-                                🇫🇷 French <span style="font-size:11px;color:var(--text-muted);font-weight:400;">(Professional)</span>
-                            </span>
-                            <span style="display:flex;align-items:center;gap:6px;font-size:14px;font-weight:500;">
-                                🇪🇸 Spanish <span style="font-size:11px;color:var(--text-muted);font-weight:400;">(Conversational)</span>
-                            </span>
                         </div>
                     </div>
                 </div>
@@ -1146,8 +1067,8 @@
         <div class="footer">
             <div class="left">
                 <span><i class="fas fa-database"></i> Data-driven · Insight-focused</span>
-                <span><i class="far fa-calendar-alt"></i> Available for freelance</span>
-                <span><i class="fas fa-map-pin"></i> Remote · Lagos</span>
+                <span><i class="far fa-calendar-alt"></i> Available for opportunities</span>
+                <span><i class="fas fa-map-pin"></i> Yola, Adamawa</span>
             </div>
             <div class="right">
                 <a href="#"><i class="fab fa-linkedin-in"></i></a>
