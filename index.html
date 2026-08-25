@@ -6,6 +6,8 @@
     <title>Naphtali Sunday · Web Developer & Data Analyst</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <!-- html2pdf library for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <style>
         /* ===========================
            CSS VARIABLES & RESET
@@ -76,7 +78,6 @@
             gap: 24px;
         }
 
-        /* ===== PROFILE IMAGE / AVATAR ===== */
         .avatar-wrapper {
             position: relative;
             flex-shrink: 0;
@@ -95,6 +96,7 @@
             justify-content: center;
             transition: var(--transition);
             position: relative;
+            cursor: pointer;
         }
 
         .avatar:hover {
@@ -116,7 +118,6 @@
             text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
         }
 
-        /* Status dot overlay */
         .status-dot {
             position: absolute;
             bottom: 4px;
@@ -130,7 +131,6 @@
             z-index: 2;
         }
 
-        /* Glow ring around avatar */
         .avatar-wrapper::before {
             content: '';
             position: absolute;
@@ -261,6 +261,59 @@
         .contact-links a.resume-btn:hover {
             background: var(--accent-light);
             box-shadow: 0 4px 16px rgba(26, 90, 140, 0.4);
+        }
+
+        .download-options {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--surface);
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-lg);
+            padding: 8px 0;
+            min-width: 180px;
+            z-index: 100;
+            margin-top: 4px;
+            border: 1px solid var(--border);
+        }
+
+        .download-options.show {
+            display: block;
+            animation: slideDown 0.2s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .download-options a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 18px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 13px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .download-options a:hover {
+            background: var(--surface-dark);
+            color: var(--accent);
+        }
+
+        .download-options a i {
+            font-size: 16px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .resume-btn-wrapper {
+            position: relative;
+            display: inline-block;
         }
 
         /* ===========================
@@ -826,6 +879,11 @@
                 height: 40px;
                 font-size: 20px;
             }
+            .download-options {
+                right: 0;
+                left: 0;
+                min-width: unset;
+            }
         }
 
         @media (max-width: 400px) {
@@ -876,6 +934,13 @@
         .text-center {
             text-align: center;
         }
+
+        /* ===========================
+           RESUME PREVIEW (Hidden)
+        =========================== */
+        #resumeContent {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -888,7 +953,7 @@
         <div class="hero">
             <div class="hero-left">
                 <div class="avatar-wrapper">
-                    <div class="avatar" onclick="openImageModal()" style="cursor:pointer;">
+                    <div class="avatar" onclick="openImageModal()">
                         <img src="milly.jpeg" alt="Naphtali Sunday" />
                         <span class="status-dot"></span>
                     </div>
@@ -913,7 +978,20 @@
                     <a href="mailto:naphtalisunday2944@gmail.com"><i class="fas fa-envelope"></i> Email</a>
                     <a href="https://www.linkedin.com/in/naphtali-sunday-aa6201244" target="_blank"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
                     <a href="https://github.com/sundaymilly" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-                    <a href="#" class="resume-btn" id="downloadResume"><i class="fas fa-file-pdf"></i> Resume</a>
+                    <div class="resume-btn-wrapper">
+                        <a href="#" class="resume-btn" id="resumeToggle"><i class="fas fa-file-pdf"></i> Resume</a>
+                        <div class="download-options" id="downloadOptions">
+                            <a href="#" onclick="downloadResume('pdf'); return false;">
+                                <i class="fas fa-file-pdf" style="color:#dc3545;"></i> Download as PDF
+                            </a>
+                            <a href="#" onclick="downloadResume('doc'); return false;">
+                                <i class="fas fa-file-word" style="color:#2b5797;"></i> Download as Word
+                            </a>
+                            <a href="#" onclick="downloadResume('txt'); return false;">
+                                <i class="fas fa-file-alt" style="color:#6c757d;"></i> Download as Text
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1322,6 +1400,193 @@
         </div>
     </div>
 
+    <!-- ===========================
+    RESUME CONTENT (Hidden - Used for PDF/Word generation)
+    =========================== -->
+    <div id="resumeContent">
+        <div style="font-family: 'Inter', Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 40px; color: #1a1a2e; line-height: 1.6; background: #fff;">
+            
+            <!-- Header -->
+            <div style="text-align: center; border-bottom: 3px solid #1a5a8c; padding-bottom: 20px; margin-bottom: 24px;">
+                <h1 style="font-size: 28px; font-weight: 800; margin: 0; color: #0f172a;">NAPHTALI SUNDAY</h1>
+                <p style="font-size: 16px; color: #475569; margin: 4px 0 0 0; font-weight: 600;">Web Developer · Data Analyst · MEAL Specialist</p>
+                <p style="font-size: 13px; color: #64748b; margin: 6px 0 0 0;">
+                    Yola, Adamawa, Nigeria | naphtalisunday2944@gmail.com | +234 80 1234 5678
+                </p>
+                <p style="font-size: 13px; color: #64748b; margin: 2px 0 0 0;">
+                    linkedin.com/in/naphtali-sunday-aa6201244 | github.com/sundaymilly
+                </p>
+            </div>
+
+            <!-- Professional Summary -->
+            <div style="margin-bottom: 20px;">
+                <h2 style="font-size: 16px; font-weight: 700; color: #1a5a8c; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">Professional Summary</h2>
+                <p style="font-size: 14px; color: #334155; margin-top: 8px; line-height: 1.8;">
+                    A versatile Computer Science graduate with <strong>6+ years</strong> of experience as a 
+                    <strong>Web Developer</strong>, <strong>Data Analyst</strong>, and <strong>MEAL Specialist</strong>. 
+                    Proven expertise in full-stack web development, data management systems, and capacity building. 
+                    Experience supporting <strong>USAID/PEPFAR-funded</strong> health programs across Northeast Nigeria. 
+                    Strong background in <strong>LAMIS, DHIS2, SQL</strong>, and web application development.
+                </p>
+            </div>
+
+            <!-- Stats -->
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px;">
+                <div style="background: #f1f5f9; padding: 12px; border-radius: 8px; text-align: center;">
+                    <div style="font-size: 20px; font-weight: 800; color: #1a5a8c;">6+</div>
+                    <div style="font-size: 11px; color: #64748b; text-transform: uppercase;">Years Experience</div>
+                </div>
+                <div style="background: #f1f5f9; padding: 12px; border-radius: 8px; text-align: center;">
+                    <div style="font-size: 20px; font-weight: 800; color: #1a5a8c;">100+</div>
+                    <div style="font-size: 11px; color: #64748b; text-transform: uppercase;">Trained Professionals</div>
+                </div>
+                <div style="background: #f1f5f9; padding: 12px; border-radius: 8px; text-align: center;">
+                    <div style="font-size: 20px; font-weight: 800; color: #1a5a8c;">99%</div>
+                    <div style="font-size: 11px; color: #64748b; text-transform: uppercase;">Data Integrity</div>
+                </div>
+                <div style="background: #f1f5f9; padding: 12px; border-radius: 8px; text-align: center;">
+                    <div style="font-size: 20px; font-weight: 800; color: #1a5a8c;">20+</div>
+                    <div style="font-size: 11px; color: #64748b; text-transform: uppercase;">Field Sites</div>
+                </div>
+            </div>
+
+            <!-- Skills -->
+            <div style="margin-bottom: 20px;">
+                <h2 style="font-size: 16px; font-weight: 700; color: #1a5a8c; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">Technical Skills</h2>
+                <table style="width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 13px;">
+                    <tr>
+                        <td style="padding: 4px 8px; font-weight: 600; width: 30%; vertical-align: top;">Web Development</td>
+                        <td style="padding: 4px 8px; vertical-align: top;">HTML5, CSS3, JavaScript, PHP, MySQL, React, Node.js, Bootstrap, REST APIs</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 4px 8px; font-weight: 600; vertical-align: top;">Data &amp; MEAL Systems</td>
+                        <td style="padding: 4px 8px; vertical-align: top;">LAMIS, DHIS2, SQL, Data Quality Assurance, Indicator Tracking, Donor Reporting, Strategic Information, ETL Processes</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 4px 8px; font-weight: 600; vertical-align: top;">Capacity Building</td>
+                        <td style="padding: 4px 8px; vertical-align: top;">Training Facilitation, Coaching &amp; Mentorship, Community Engagement, Stakeholder Coordination, Report Writing</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 4px 8px; font-weight: 600; vertical-align: top;">Tools &amp; Design</td>
+                        <td style="padding: 4px 8px; vertical-align: top;">UI/UX Design, Adobe Photoshop, Microsoft Office Suite, Git, Figma</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Experience -->
+            <div style="margin-bottom: 20px;">
+                <h2 style="font-size: 16px; font-weight: 700; color: #1a5a8c; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">Professional Experience</h2>
+                
+                <div style="margin-top: 8px;">
+                    <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap;">
+                        <strong style="font-size: 14px; color: #0f172a;">M&E Assistant/DEC</strong>
+                        <span style="font-size: 12px; color: #94a3b8;">2022 – Present</span>
+                    </div>
+                    <div style="font-size: 13px; color: #1a5a8c; font-weight: 600;">Society for Family Health (SFH) · USAID/PEPFAR CARE 2 Project</div>
+                    <ul style="font-size: 13px; color: #475569; padding-left: 20px; margin: 4px 0 8px 0; line-height: 1.7;">
+                        <li>Provide technical oversight for HIV case management data systems using LAMIS and DHIS2.</li>
+                        <li>Lead end-to-end data management for 20+ field sites, achieving 99% data completeness.</li>
+                        <li>Track referral, linkage, retention, and adherence data to assess program performance.</li>
+                        <li>Strengthen referral pathway documentation for GBV survivors and vulnerable populations.</li>
+                        <li>Facilitate monthly data review meetings translating complex data into actionable insights.</li>
+                        <li>Generate monthly, quarterly, and donor reports for USAID/PEPFAR.</li>
+                    </ul>
+
+                    <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; margin-top: 6px;">
+                        <strong style="font-size: 14px; color: #0f172a;">Web Developer &amp; Data Analyst</strong>
+                        <span style="font-size: 12px; color: #94a3b8;">2021 – Present</span>
+                    </div>
+                    <div style="font-size: 13px; color: #1a5a8c; font-weight: 600;">Freelance &amp; Contract Projects</div>
+                    <ul style="font-size: 13px; color: #475569; padding-left: 20px; margin: 4px 0 8px 0; line-height: 1.7;">
+                        <li>Built custom web applications and websites for clients across various sectors.</li>
+                        <li>Designed and deployed a Web-based Integrated Restaurant System as a final-year project.</li>
+                        <li>Developed data-driven platforms with SQL and PHP for real-time reporting.</li>
+                    </ul>
+
+                    <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; margin-top: 6px;">
+                        <strong style="font-size: 14px; color: #0f172a;">Financial Advisor</strong>
+                        <span style="font-size: 12px; color: #94a3b8;">2020 – 2021</span>
+                    </div>
+                    <div style="font-size: 13px; color: #1a5a8c; font-weight: 600;">Heirs Life Assurance · UBA Bank, Yola</div>
+                    <ul style="font-size: 13px; color: #475569; padding-left: 20px; margin: 4px 0 8px 0; line-height: 1.7;">
+                        <li>Conducted financial consultations for 100+ clients, developing tailored insurance plans.</li>
+                        <li>Achieved 85% client retention rate.</li>
+                        <li>Maintained 100% compliance with industry regulations.</li>
+                    </ul>
+
+                    <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; margin-top: 6px;">
+                        <strong style="font-size: 14px; color: #0f172a;">Classroom Teacher (NYSC)</strong>
+                        <span style="font-size: 12px; color: #94a3b8;">2019 – 2020</span>
+                    </div>
+                    <div style="font-size: 13px; color: #1a5a8c; font-weight: 600;">LCCN No:1 Academy School, Yola</div>
+                    <ul style="font-size: 13px; color: #475569; padding-left: 20px; margin: 4px 0 8px 0; line-height: 1.7;">
+                        <li>Integrated digital tools into curriculum, enhancing student engagement.</li>
+                        <li>Achieved 20% improvement in student test scores.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Education & Certifications -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 20px;">
+                <div>
+                    <h2 style="font-size: 16px; font-weight: 700; color: #1a5a8c; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">Education</h2>
+                    <div style="margin-top: 8px;">
+                        <strong style="font-size: 14px; color: #0f172a;">B.Sc. Computer Science</strong>
+                        <div style="font-size: 13px; color: #1a5a8c;">Taraba State University, Jalingo</div>
+                        <div style="font-size: 12px; color: #94a3b8;">2017 – 2022</div>
+                        <div style="font-size: 13px; color: #475569; margin-top: 2px;">Final Year Project: Web-based Integrated Restaurant System</div>
+                    </div>
+                </div>
+                <div>
+                    <h2 style="font-size: 16px; font-weight: 700; color: #1a5a8c; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">Certifications</h2>
+                    <ul style="font-size: 13px; color: #475569; padding-left: 20px; margin-top: 8px; line-height: 1.8;">
+                        <li><strong>SQL</strong> — Society for Family Health (2025)</li>
+                        <li><strong>Diploma in Ethical Hacking</strong> — Alison (2022)</li>
+                        <li><strong>How to Prevent E-waste</strong> — UNITAR (2022)</li>
+                        <li><strong>Microsoft Packages &amp; Graphic Design</strong> — 360Techworld (2022)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Achievements -->
+            <div style="margin-bottom: 20px;">
+                <h2 style="font-size: 16px; font-weight: 700; color: #1a5a8c; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">Key Achievements</h2>
+                <ul style="font-size: 13px; color: #475569; padding-left: 20px; margin-top: 8px; line-height: 1.8;">
+                    <li><strong>99% Data Integrity:</strong> Improved data completeness from 85% to 99% across 20+ field sites.</li>
+                    <li><strong>20% Student Improvement:</strong> Technology-enhanced learning impact in classroom teaching.</li>
+                    <li><strong>Web-based Restaurant System:</strong> Full-stack development project as final-year submission.</li>
+                    <li><strong>100+ Trained Professionals:</strong> Capacity building across multiple cohorts in digital skills.</li>
+                    <li><strong>85% Client Retention:</strong> Excellence in financial advisory and client relationship management.</li>
+                </ul>
+            </div>
+
+            <!-- Languages -->
+            <div style="margin-bottom: 20px;">
+                <h2 style="font-size: 16px; font-weight: 700; color: #1a5a8c; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">Languages</h2>
+                <table style="width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 13px;">
+                    <tr>
+                        <td style="padding: 4px 8px; font-weight: 600; width: 30%;">English</td>
+                        <td style="padding: 4px 8px;">Professional</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 4px 8px; font-weight: 600;">Hausa</td>
+                        <td style="padding: 4px 8px;">Native</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 4px 8px; font-weight: 600;">Fulfulde</td>
+                        <td style="padding: 4px 8px;">Native</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- References -->
+            <div style="text-align: center; font-size: 13px; color: #94a3b8; border-top: 2px solid #e2e8f0; padding-top: 16px; margin-top: 8px;">
+                <p><strong>References</strong> available upon request.</p>
+                <p style="font-size: 11px; margin-top: 4px;">Naphtali Sunday · naphtalisunday2944@gmail.com · linkedin.com/in/naphtali-sunday-aa6201244</p>
+            </div>
+        </div>
+    </div>
+
     <script>
         // ===========================
         // PROFILE IMAGE MODAL
@@ -1336,7 +1601,6 @@
             document.body.style.overflow = '';
         }
 
-        // Close modal with Escape key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeImageModal();
@@ -1344,127 +1608,133 @@
         });
 
         // ===========================
-        // RESUME DOWNLOAD FUNCTIONALITY
+        // RESUME DOWNLOAD TOGGLE
         // ===========================
-        document.getElementById('downloadResume').addEventListener('click', function(e) {
+        document.getElementById('resumeToggle').addEventListener('click', function(e) {
             e.preventDefault();
+            document.getElementById('downloadOptions').classList.toggle('show');
+        });
 
-            // Create resume content
-            const resumeContent = `
-                NAPHTALI SUNDAY
-                Web Developer · Data Analyst · MEAL Specialist
-                Yola, Adamawa, Nigeria
-                naphtalisunday2944@gmail.com
-                LinkedIn: linkedin.com/in/naphtali-sunday-aa6201244
-                GitHub: github.com/sundaymilly
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            const wrapper = document.querySelector('.resume-btn-wrapper');
+            if (wrapper && !wrapper.contains(e.target)) {
+                document.getElementById('downloadOptions').classList.remove('show');
+            }
+        });
 
-                ============================================================
-                PROFESSIONAL SUMMARY
-                ============================================================
-                A versatile Computer Science graduate with over 6 years of experience
-                as a Web Developer, Data Analyst, and MEAL Specialist. Proven expertise
-                in full-stack web development, data management systems, and capacity
-                building. Experience supporting USAID/PEPFAR-funded health programs
-                across Northeast Nigeria. Strong background in LAMIS, DHIS2, SQL,
-                and web application development.
+        // ===========================
+        // RESUME DOWNLOAD FUNCTIONS
+        // ===========================
+        function downloadResume(format) {
+            document.getElementById('downloadOptions').classList.remove('show');
 
-                ============================================================
-                KEY SKILLS
-                ============================================================
-                Web Development:      HTML5, CSS3, JavaScript, PHP, MySQL, React,
-                                      Node.js, Bootstrap, REST APIs
-                Data & MEAL Systems:  LAMIS, DHIS2, SQL, Data Quality Assurance,
-                                      Indicator Tracking, Donor Reporting
-                Capacity Building:    Training Facilitation, Coaching, Mentorship,
-                                      Community Engagement, Report Writing
-                Tools & Design:       UI/UX Design, Adobe Photoshop, MS Office, Git
+            if (format === 'txt') {
+                downloadTxtResume();
+            } else if (format === 'pdf') {
+                downloadPdfResume();
+            } else if (format === 'doc') {
+                downloadWordResume();
+            }
+        }
 
-                ============================================================
-                PROFESSIONAL EXPERIENCE
-                ============================================================
-
-                M&E Assistant/DEC
-                Society for Family Health (SFH) · USAID/PEPFAR CARE 2 Project
-                2022 – Present
-                • Oversee HIV case management data systems using LAMIS and DHIS2
-                • Lead data management for 20+ field sites with 99% data completeness
-                • Track referral, linkage, retention, and adherence data
-                • Facilitate monthly data review meetings
-                • Generate donor reports for USAID/PEPFAR
-
-                Web Developer & Data Analyst
-                Freelance & Contract Projects
-                2021 – Present
-                • Built custom web applications and websites
-                • Designed Web-based Integrated Restaurant System
-                • Developed data-driven platforms with SQL and PHP
-
-                Financial Advisor
-                Heirs Life Assurance · UBA Bank, Yola
-                2020 – 2021
-                • Conducted financial consultations for 100+ clients
-                • Achieved 85% client retention rate
-                • Maintained 100% compliance with regulations
-
-                Classroom Teacher (NYSC)
-                LCCN No:1 Academy School, Yola
-                2019 – 2020
-                • Integrated digital tools into curriculum
-                • Achieved 20% improvement in student test scores
-
-                Computer Operator / Graphic Designer
-                Isme Cybercafe, Jalingo
-                2017 – 2019
-                • Managed data entry and database maintenance
-                • Produced operational reports
-
-                ============================================================
-                EDUCATION
-                ============================================================
-                B.Sc. Computer Science
-                Taraba State University, Jalingo
-                2017 – 2022
-                Final Year Project: Web-based Integrated Restaurant System
-
-                ============================================================
-                CERTIFICATIONS
-                ============================================================
-                SQL - Society for Family Health (2025)
-                Diploma in Ethical Hacking - Alison (2022)
-                How to Prevent E-waste - UNITAR (2022)
-                Microsoft Packages & Graphic Design - 360Techworld (2022)
-
-                ============================================================
-                KEY ACHIEVEMENTS
-                ============================================================
-                • 99% Data Integrity: Improved data completeness from 85% to 99%
-                • 20% Student Improvement: Technology-enhanced learning impact
-                • Web-based Restaurant System: Full-stack development project
-                • 100+ Trained Professionals: Capacity building across cohorts
-                • 85% Client Retention: Financial advisory excellence
-
-                ============================================================
-                LANGUAGES
-                ============================================================
-                English (Professional) · Hausa (Native) · Fulfulde (Native)
-
-                ============================================================
-                REFERENCES
-                ============================================================
-                Available upon request.
-            `;
-
-            // Create blob and download
-            const blob = new Blob([resumeContent], { type: 'text/plain;charset=utf-8' });
-            const url = URL.createObjectURL(blob);
+        // --- TXT Download ---
+        function downloadTxtResume() {
+            const content = document.getElementById('resumeContent').innerText;
+            const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
             const link = document.createElement('a');
-            link.href = url;
+            link.href = URL.createObjectURL(blob);
             link.download = 'Naphtali_Sunday_Resume.txt';
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
-            URL.revokeObjectURL(url);
-        });
+            URL.revokeObjectURL(link.href);
+        }
+
+        // --- PDF Download using html2pdf ---
+        function downloadPdfResume() {
+            const element = document.getElementById('resumeContent');
+            
+            // Show a loading indicator
+            const btn = document.querySelector('.resume-btn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating PDF...';
+            btn.style.opacity = '0.7';
+
+            const opt = {
+                margin: [10, 10, 10, 10],
+                filename: 'Naphtali_Sunday_Resume.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: {
+                    scale: 2,
+                    useCORS: true,
+                    letterRendering: true,
+                    backgroundColor: '#ffffff',
+                    logging: false
+                },
+                jsPDF: {
+                    unit: 'mm',
+                    format: 'a4',
+                    orientation: 'portrait'
+                },
+                pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+            };
+
+            html2pdf().set(opt).from(element).save().then(function() {
+                btn.innerHTML = originalText;
+                btn.style.opacity = '1';
+            }).catch(function(err) {
+                console.error('PDF generation error:', err);
+                btn.innerHTML = originalText;
+                btn.style.opacity = '1';
+                alert('Error generating PDF. Please try again or use the Text format.');
+            });
+        }
+
+        // --- Word Download (HTML format that Word can open) ---
+        function downloadWordResume() {
+            const content = document.getElementById('resumeContent').innerHTML;
+            
+            const wordHTML = `
+                <html xmlns:o='urn:schemas-microsoft-com:office:office' 
+                      xmlns:w='urn:schemas-microsoft-com:office:word' 
+                      xmlns='http://www.w3.org/TR/REC-html40'>
+                <head>
+                    <meta charset="utf-8">
+                    <title>Naphtali Sunday - Resume</title>
+                    <style>
+                        body { font-family: 'Inter', Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 40px; color: #1a1a2e; line-height: 1.6; background: #fff; }
+                        h1 { font-size: 28px; font-weight: 800; margin: 0; color: #0f172a; }
+                        h2 { font-size: 16px; font-weight: 700; color: #1a5a8c; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 20px; }
+                        table { width: 100%; border-collapse: collapse; }
+                        td { padding: 4px 8px; }
+                        ul { padding-left: 20px; }
+                        li { margin-bottom: 2px; }
+                        .text-center { text-align: center; }
+                        .border-bottom { border-bottom: 3px solid #1a5a8c; padding-bottom: 20px; margin-bottom: 24px; }
+                        .stats-grid { display: flex; gap: 12px; margin: 16px 0; }
+                        .stat-card { background: #f1f5f9; padding: 12px; border-radius: 8px; text-align: center; flex: 1; }
+                        .stat-number { font-size: 20px; font-weight: 800; color: #1a5a8c; }
+                        .stat-label { font-size: 11px; color: #64748b; text-transform: uppercase; }
+                    </style>
+                </head>
+                <body>
+                    ${content}
+                </body>
+                </html>
+            `;
+
+            const blob = new Blob([wordHTML], { 
+                type: 'application/msword;charset=utf-8' 
+            });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'Naphtali_Sunday_Resume.doc';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(link.href);
+        }
     </script>
 
 </body>
