@@ -6,31 +6,33 @@
     <title>Naphtali Sunday · Web Developer & Data Analyst</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <!-- html2pdf library for PDF generation -->
+    <!-- html2pdf library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
     <style>
         /* ===========================
            CSS VARIABLES & RESET
         =========================== */
         :root {
-            --primary: #0f172a;
+            --primary: #0b1120;
             --primary-light: #1e293b;
-            --accent: #1a5a8c;
-            --accent-light: #2a7abf;
-            --accent-gradient: linear-gradient(135deg, #1a5a8c, #2a7abf);
-            --bg: #f8fafc;
-            --surface: #ffffff;
-            --surface-dark: #f1f5f9;
+            --accent: #3b82f6;
+            --accent-light: #60a5fa;
+            --accent-gradient: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            --bg: #f0f4f8;
+            --surface: rgba(255, 255, 255, 0.75);
+            --surface-solid: #ffffff;
+            --glass-border: rgba(255, 255, 255, 0.4);
             --text: #0f172a;
             --text-secondary: #475569;
             --text-muted: #94a3b8;
             --border: #e2e8f0;
-            --shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
-            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.08);
-            --radius: 16px;
-            --radius-sm: 10px;
-            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            --max-width: 1100px;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.1);
+            --shadow-glass: 0 8px 32px rgba(31, 38, 135, 0.1);
+            --radius: 20px;
+            --radius-sm: 12px;
+            --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * {
@@ -41,358 +43,275 @@
 
         body {
             font-family: 'Inter', -apple-system, sans-serif;
-            background: #fff;
+            background: #eef2f7;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.1) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.1) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(59, 130, 246, 0.05) 0px, transparent 50%);
             color: var(--text);
             line-height: 1.6;
             padding: 24px;
             min-height: 100vh;
         }
 
-        .container {
-            max-width: var(--max-width);
+        /* ===========================
+           LAYOUT & CONTAINER
+        =========================== */
+        .app-container {
+            max-width: 1280px;
             margin: 0 auto;
-            background: var(--surface);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-lg);
-            padding: 48px 52px 40px;
-            transition: var(--transition);
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 24px;
+            align-items: start;
         }
 
         /* ===========================
-           HEADER / HERO
+           ASIDE PANEL (GLASSY)
         =========================== */
-        .hero {
+        .aside-panel {
+            position: sticky;
+            top: 24px;
+            background: var(--surface);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-glass);
+            padding: 24px 20px;
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
+            flex-direction: column;
             gap: 24px;
-            padding-bottom: 32px;
-            border-bottom: 2px solid var(--border);
-            margin-bottom: 36px;
+            transition: var(--transition);
         }
 
-        .hero-left {
-            display: flex;
-            align-items: center;
-            gap: 24px;
+        .aside-profile {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
         }
 
-        .avatar-wrapper {
-            position: relative;
-            flex-shrink: 0;
-        }
-
-        .avatar {
+        .aside-avatar {
             width: 100px;
             height: 100px;
             border-radius: 50%;
+            margin: 0 auto 12px;
             overflow: hidden;
-            border: 4px solid var(--surface);
-            box-shadow: 0 8px 30px rgba(26, 90, 140, 0.25);
+            border: 3px solid #fff;
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.25);
             background: var(--accent-gradient);
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: var(--transition);
-            position: relative;
             cursor: pointer;
+            transition: var(--transition);
         }
 
-        .avatar:hover {
+        .aside-avatar:hover {
             transform: scale(1.05);
-            box-shadow: 0 12px 40px rgba(26, 90, 140, 0.35);
+            box-shadow: 0 12px 32px rgba(59, 130, 246, 0.35);
         }
 
-        .avatar img {
+        .aside-avatar img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center;
         }
 
-        .avatar .placeholder {
-            color: #fff;
-            font-size: 32px;
+        .aside-name {
+            font-size: 18px;
             font-weight: 800;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            letter-spacing: -0.3px;
         }
 
-        .status-dot {
-            position: absolute;
-            bottom: 4px;
-            right: 4px;
-            width: 18px;
-            height: 18px;
-            background: #22c55e;
-            border-radius: 50%;
-            border: 3px solid var(--surface);
-            box-shadow: 0 2px 8px rgba(34, 197, 94, 0.4);
-            z-index: 2;
-        }
-
-        .avatar-wrapper::before {
-            content: '';
-            position: absolute;
-            inset: -3px;
-            border-radius: 50%;
-            background: var(--accent-gradient);
-            opacity: 0.15;
-            z-index: -1;
-            transition: var(--transition);
-        }
-
-        .avatar-wrapper:hover::before {
-            opacity: 0.3;
-            transform: scale(1.02);
-        }
-
-        .name-title h1 {
-            font-size: 32px;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            line-height: 1.2;
-        }
-
-        .name-title h1 span {
+        .aside-name span {
             color: var(--accent);
         }
 
-        .name-title .title {
-            font-size: 17px;
-            color: var(--text-secondary);
-            font-weight: 400;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .name-title .title i {
-            color: var(--accent);
-            font-size: 14px;
-        }
-
-        .badge-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-top: 6px;
-        }
-
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            padding: 2px 14px;
-            border-radius: 20px;
+        .aside-title {
             font-size: 12px;
-            font-weight: 600;
-            background: var(--surface-dark);
             color: var(--text-secondary);
+            font-weight: 500;
         }
 
-        .badge i {
-            font-size: 11px;
-        }
-
-        .badge.primary {
-            background: var(--accent);
-            color: #fff;
-        }
-
-        .badge.success {
-            background: #dcfce7;
-            color: #16a34a;
-        }
-
-        .hero-right {
+        .aside-nav {
             display: flex;
             flex-direction: column;
-            align-items: flex-end;
+            gap: 4px;
+        }
+
+        .aside-nav button {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            border-radius: var(--radius-sm);
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: left;
+            width: 100%;
+        }
+
+        .aside-nav button:hover {
+            background: rgba(59, 130, 246, 0.08);
+            color: var(--accent);
+        }
+
+        .aside-nav button.active {
+            background: var(--accent-gradient);
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
+        }
+
+        .aside-nav button i {
+            width: 20px;
+            font-size: 15px;
+        }
+
+        .aside-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 8px;
         }
 
-        .hero-right .availability {
-            font-size: 13px;
-            font-weight: 600;
-            color: #22c55e;
-            background: #dcfce7;
-            padding: 4px 16px;
-            border-radius: 20px;
+        .aside-stat-item {
+            background: rgba(255,255,255,0.5);
+            border-radius: var(--radius-sm);
+            padding: 10px;
+            text-align: center;
+            border: 1px solid rgba(0,0,0,0.04);
         }
 
-        .contact-links {
+        .aside-stat-item .num {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        .aside-stat-item .lbl {
+            font-size: 10px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .aside-contact {
             display: flex;
             gap: 8px;
-            flex-wrap: wrap;
+            justify-content: center;
         }
 
-        .contact-links a {
-            display: inline-flex;
+        .aside-contact a {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            display: flex;
             align-items: center;
-            gap: 6px;
-            padding: 8px 18px;
-            border-radius: 40px;
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 500;
-            transition: var(--transition);
-            background: var(--surface-dark);
+            justify-content: center;
             color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.04);
         }
 
-        .contact-links a:hover {
+        .aside-contact a:hover {
             background: var(--accent);
             color: #fff;
             transform: translateY(-2px);
-            box-shadow: 0 4px 16px rgba(26, 90, 140, 0.3);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
         }
 
-        .contact-links a i {
-            font-size: 14px;
-        }
-
-        .contact-links a.resume-btn {
-            background: var(--accent);
-            color: #fff;
-        }
-
-        .contact-links a.resume-btn:hover {
-            background: var(--accent-light);
-            box-shadow: 0 4px 16px rgba(26, 90, 140, 0.4);
-        }
-
-        .download-options {
-            display: none;
-            position: absolute;
-            top: 100%;
-            right: 0;
+        /* ===========================
+           MAIN CONTENT (GLASS)
+        =========================== */
+        .main-content {
             background: var(--surface);
-            border-radius: var(--radius-sm);
-            box-shadow: var(--shadow-lg);
-            padding: 8px 0;
-            min-width: 180px;
-            z-index: 100;
-            margin-top: 4px;
-            border: 1px solid var(--border);
-        }
-
-        .download-options.show {
-            display: block;
-            animation: slideDown 0.2s ease;
-        }
-
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .download-options a {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 18px;
-            text-decoration: none;
-            color: var(--text-secondary);
-            font-size: 13px;
-            font-weight: 500;
-            transition: var(--transition);
-        }
-
-        .download-options a:hover {
-            background: var(--surface-dark);
-            color: var(--accent);
-        }
-
-        .download-options a i {
-            font-size: 16px;
-            width: 20px;
-            text-align: center;
-        }
-
-        .resume-btn-wrapper {
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-glass);
+            padding: 40px 44px;
+            min-height: 80vh;
             position: relative;
-            display: inline-block;
+            overflow: hidden;
+        }
+
+        /* Page Flip Container */
+        .page-container {
+            position: relative;
+            min-height: 600px;
+        }
+
+        .page-section {
+            display: none;
+            opacity: 0;
+            transform: perspective(1200px) rotateY(-15deg);
+            transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: left center;
+            padding: 4px 0;
+        }
+
+        .page-section.active {
+            display: block;
+            opacity: 1;
+            transform: perspective(1200px) rotateY(0deg);
         }
 
         /* ===========================
-           GRID LAYOUT
+           SECTION STYLES (INSIDE PAGES)
         =========================== */
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-        }
-
-        /* ===========================
-           SECTION STYLES
-        =========================== */
-        .section {
-            margin-bottom: 32px;
-        }
-
-        .section:last-child {
-            margin-bottom: 0;
-        }
-
         .section-header {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 14px;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid rgba(0,0,0,0.05);
         }
 
         .section-header .icon {
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
             background: var(--accent-gradient);
             display: flex;
             align-items: center;
             justify-content: center;
             color: #fff;
-            font-size: 14px;
+            font-size: 18px;
             flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
         }
 
         .section-header h2 {
-            font-size: 15px;
+            font-size: 22px;
             font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: var(--text-muted);
+            letter-spacing: -0.3px;
         }
 
-        .section-content {
-            padding-left: 42px;
-        }
-
-        /* ===========================
-           ABOUT
-        =========================== */
+        /* About / Bio */
         .about-text {
             font-size: 15px;
             color: var(--text-secondary);
             line-height: 1.8;
         }
-
-        .about-text strong {
-            color: var(--text);
-        }
-
-        .about-text .highlight {
-            color: var(--accent);
-            font-weight: 600;
-        }
+        .about-text strong { color: var(--text); }
+        .about-text .highlight { color: var(--accent); font-weight: 600; }
 
         .about-highlights {
             display: flex;
             flex-wrap: wrap;
-            gap: 16px;
-            margin-top: 12px;
+            gap: 12px;
+            margin-top: 16px;
         }
-
         .highlight-item {
             display: flex;
             align-items: center;
@@ -400,24 +319,50 @@
             font-size: 13px;
             font-weight: 500;
             color: var(--text-secondary);
+            background: rgba(255,255,255,0.6);
+            padding: 4px 14px;
+            border-radius: 20px;
+            border: 1px solid rgba(0,0,0,0.04);
         }
+        .highlight-item i { color: var(--accent); }
 
-        .highlight-item i {
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .stat-card {
+            background: rgba(255,255,255,0.6);
+            border: 1px solid rgba(0,0,0,0.04);
+            border-radius: var(--radius-sm);
+            padding: 16px 12px;
+            text-align: center;
+            transition: var(--transition);
+        }
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+            background: #fff;
+        }
+        .stat-card .stat-number {
+            font-size: 26px;
+            font-weight: 800;
             color: var(--accent);
-            font-size: 14px;
+            line-height: 1.2;
+        }
+        .stat-card .stat-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
         }
 
-        /* ===========================
-           SKILLS
-        =========================== */
-        .skill-category {
-            margin-bottom: 12px;
-        }
-
-        .skill-category:last-child {
-            margin-bottom: 0;
-        }
-
+        /* Skills */
+        .skill-category { margin-bottom: 16px; }
+        .skill-category:last-child { margin-bottom: 0; }
         .skill-category .cat-label {
             font-size: 11px;
             font-weight: 700;
@@ -425,64 +370,47 @@
             letter-spacing: 0.5px;
             color: var(--text-muted);
             display: block;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
         }
-
         .skillset {
             display: flex;
             flex-wrap: wrap;
-            gap: 6px;
+            gap: 8px;
         }
-
         .skill-tag {
-            padding: 4px 14px;
+            padding: 6px 16px;
             border-radius: 20px;
             font-size: 12px;
             font-weight: 500;
-            background: var(--surface-dark);
+            background: rgba(255,255,255,0.6);
             color: var(--text-secondary);
+            border: 1px solid rgba(0,0,0,0.04);
             transition: var(--transition);
         }
-
         .skill-tag:hover {
             background: var(--accent);
             color: #fff;
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+            border-color: var(--accent);
         }
 
-        .skill-tag .level {
-            font-size: 9px;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            margin-left: 4px;
-        }
-
-        .skill-tag:hover .level {
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        /* ===========================
-           EXPERIENCE / EDUCATION
-        =========================== */
+        /* Experience / Education Entries */
         .entry {
-            padding: 14px 16px;
-            background: var(--surface-dark);
+            background: rgba(255,255,255,0.5);
+            border: 1px solid rgba(0,0,0,0.04);
             border-radius: var(--radius-sm);
-            margin-bottom: 12px;
-            border-left: 3px solid var(--accent);
+            padding: 18px 20px;
+            margin-bottom: 14px;
+            border-left: 4px solid var(--accent);
             transition: var(--transition);
         }
-
         .entry:hover {
-            transform: translateX(4px);
+            transform: translateX(6px);
+            background: #fff;
             box-shadow: var(--shadow);
         }
-
-        .entry:last-child {
-            margin-bottom: 0;
-        }
-
+        .entry:last-child { margin-bottom: 0; }
         .entry-header {
             display: flex;
             justify-content: space-between;
@@ -490,41 +418,26 @@
             flex-wrap: wrap;
             gap: 4px;
         }
-
-        .entry-title {
-            font-weight: 700;
-            font-size: 15px;
-            color: var(--text);
-        }
-
-        .entry-org {
-            font-weight: 600;
-            font-size: 13px;
-            color: var(--accent);
-        }
-
+        .entry-title { font-weight: 700; font-size: 16px; }
+        .entry-org { font-weight: 600; font-size: 13px; color: var(--accent); }
         .entry-date {
             font-size: 12px;
             color: var(--text-muted);
             font-weight: 500;
             white-space: nowrap;
+            background: rgba(255,255,255,0.6);
+            padding: 2px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(0,0,0,0.04);
         }
-
-        .entry-desc {
-            font-size: 13px;
-            color: var(--text-secondary);
-            margin-top: 6px;
-            padding-left: 0;
-            list-style: none;
-        }
-
+        .entry-desc { list-style: none; margin-top: 8px; }
         .entry-desc li {
             position: relative;
             padding-left: 18px;
-            margin-bottom: 3px;
+            margin-bottom: 4px;
             font-size: 13px;
+            color: var(--text-secondary);
         }
-
         .entry-desc li::before {
             content: "▸";
             position: absolute;
@@ -532,196 +445,92 @@
             color: var(--accent);
             font-weight: 700;
         }
-
-        .entry-desc li:last-child {
-            margin-bottom: 0;
-        }
-
         .entry-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 4px;
-            margin-top: 6px;
+            gap: 6px;
+            margin-top: 10px;
         }
-
         .entry-tags span {
             font-size: 10px;
-            background: var(--surface);
-            padding: 1px 10px;
+            background: rgba(59, 130, 246, 0.08);
+            padding: 2px 12px;
             border-radius: 12px;
             font-weight: 600;
-            color: var(--text-muted);
+            color: var(--accent);
         }
 
-        /* ===========================
-           ACHIEVEMENTS
-        =========================== */
-        .achievement-item {
-            background: var(--surface-dark);
-            padding: 14px 16px;
+        /* Certifications */
+        .cert-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
             border-radius: var(--radius-sm);
-            margin-bottom: 10px;
-            border-left: 3px solid #22c55e;
+            font-size: 13px;
+            background: rgba(255,255,255,0.5);
+            border: 1px solid rgba(0,0,0,0.04);
+            margin-bottom: 8px;
             transition: var(--transition);
         }
-
-        .achievement-item:hover {
-            transform: translateX(4px);
+        .cert-item:hover {
+            transform: translateX(6px);
+            background: #fff;
             box-shadow: var(--shadow);
         }
+        .cert-item i { color: var(--accent); width: 20px; text-align: center; font-size: 16px; }
+        .cert-item .cert-org { color: var(--text-muted); font-size: 12px; margin-left: auto; }
+        .cert-item .cert-date { font-size: 11px; color: var(--text-muted); }
 
-        .achievement-item:last-child {
-            margin-bottom: 0;
+        /* Achievements */
+        .achievement-item {
+            background: rgba(255,255,255,0.5);
+            border: 1px solid rgba(0,0,0,0.04);
+            padding: 16px 18px;
+            border-radius: var(--radius-sm);
+            margin-bottom: 10px;
+            border-left: 4px solid #22c55e;
+            transition: var(--transition);
         }
-
+        .achievement-item:hover {
+            transform: translateX(6px);
+            background: #fff;
+            box-shadow: var(--shadow);
+        }
+        .achievement-item:last-child { margin-bottom: 0; }
         .achievement-item .ach-title {
             font-weight: 700;
             font-size: 14px;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
         }
-
-        .achievement-item .ach-title i {
-            color: #22c55e;
-        }
-
+        .achievement-item .ach-title i { color: #22c55e; }
         .achievement-item .ach-desc {
             font-size: 13px;
             color: var(--text-secondary);
-            margin-top: 2px;
+            margin-top: 4px;
         }
 
-        /* ===========================
-           CERTIFICATIONS
-        =========================== */
-        .cert-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 8px 12px;
-            border-radius: var(--radius-sm);
-            font-size: 13px;
-            background: var(--surface-dark);
-            margin-bottom: 6px;
-            transition: var(--transition);
-        }
-
-        .cert-item:hover {
-            transform: translateX(4px);
-        }
-
-        .cert-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .cert-item i {
-            color: var(--accent);
-            width: 18px;
-            text-align: center;
-            font-size: 14px;
-        }
-
-        .cert-item .cert-org {
-            color: var(--text-muted);
-            font-size: 12px;
-            margin-left: auto;
-        }
-
-        .cert-item .cert-date {
-            font-size: 11px;
-            color: var(--text-muted);
-        }
-
-        /* ===========================
-           STATS / METRICS
-        =========================== */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-            margin-top: 16px;
-            margin-bottom: 12px;
-        }
-
-        .stat-card {
-            background: var(--surface-dark);
-            padding: 14px 12px;
-            border-radius: var(--radius-sm);
-            text-align: center;
-            transition: var(--transition);
-        }
-
-        .stat-card:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow);
-        }
-
-        .stat-card .stat-number {
-            font-size: 24px;
-            font-weight: 800;
-            color: var(--accent);
-            line-height: 1.2;
-        }
-
-        .stat-card .stat-label {
-            font-size: 11px;
-            color: var(--text-muted);
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-        }
-
-        /* ===========================
-           FOOTER
-        =========================== */
+        /* Footer */
         .footer {
-            margin-top: 36px;
-            padding-top: 24px;
-            border-top: 2px solid var(--border);
+            margin-top: 32px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0,0,0,0.06);
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 12px;
         }
-
         .footer .left {
             display: flex;
             align-items: center;
             gap: 16px;
-            font-size: 13px;
+            font-size: 12px;
             color: var(--text-muted);
         }
-
-        .footer .left i {
-            color: var(--accent);
-        }
-
-        .footer .right {
-            display: flex;
-            gap: 12px;
-        }
-
-        .footer .right a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 15px;
-            transition: var(--transition);
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background: var(--surface-dark);
-        }
-
-        .footer .right a:hover {
-            color: #fff;
-            background: var(--accent);
-            transform: translateY(-2px);
-        }
+        .footer .left i { color: var(--accent); }
 
         /* ===========================
            PROFILE IMAGE MODAL
@@ -730,7 +539,7 @@
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(12px);
             z-index: 9999;
             justify-content: center;
@@ -738,17 +547,14 @@
             padding: 30px;
             cursor: pointer;
         }
-
         .image-modal.active {
             display: flex;
             animation: modalFadeIn 0.3s ease;
         }
-
         @keyframes modalFadeIn {
             from { opacity: 0; transform: scale(0.9); }
             to { opacity: 1; transform: scale(1); }
         }
-
         .image-modal-content {
             max-width: 500px;
             width: 100%;
@@ -758,7 +564,6 @@
             box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
             position: relative;
         }
-
         .image-modal-content img {
             width: 100%;
             height: auto;
@@ -766,7 +571,6 @@
             object-fit: contain;
             max-height: 80vh;
         }
-
         .image-modal-close {
             position: fixed;
             top: 24px;
@@ -785,158 +589,13 @@
             justify-content: center;
             backdrop-filter: blur(4px);
         }
-
         .image-modal-close:hover {
             background: rgba(255, 255, 255, 0.2);
             transform: rotate(90deg);
         }
 
         /* ===========================
-           RESPONSIVE
-        =========================== */
-        @media (max-width: 900px) {
-            .container {
-                padding: 32px 28px;
-            }
-            .grid-2 {
-                grid-template-columns: 1fr;
-                gap: 24px;
-            }
-            .hero {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .hero-right {
-                align-items: flex-start;
-                width: 100%;
-            }
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .section-content {
-                padding-left: 0;
-            }
-            .section-header .icon {
-                display: none;
-            }
-        }
-
-        @media (max-width: 600px) {
-            body {
-                padding: 12px;
-            }
-            .container {
-                padding: 20px 16px;
-                border-radius: var(--radius-sm);
-            }
-            .hero-left {
-                flex-wrap: wrap;
-            }
-            .avatar {
-                width: 72px;
-                height: 72px;
-            }
-            .avatar .placeholder {
-                font-size: 22px;
-            }
-            .name-title h1 {
-                font-size: 24px;
-            }
-            .name-title .title {
-                font-size: 14px;
-            }
-            .contact-links a {
-                font-size: 12px;
-                padding: 6px 12px;
-            }
-            .entry-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .stats-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 8px;
-            }
-            .stat-card .stat-number {
-                font-size: 20px;
-            }
-            .footer {
-                flex-direction: column;
-                text-align: center;
-            }
-            .footer .left {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            .image-modal-content {
-                max-width: 100%;
-                margin: 10px;
-            }
-            .image-modal-close {
-                top: 12px;
-                right: 12px;
-                width: 40px;
-                height: 40px;
-                font-size: 20px;
-            }
-            .download-options {
-                right: 0;
-                left: 0;
-                min-width: unset;
-            }
-        }
-
-        @media (max-width: 400px) {
-            .stats-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .contact-links {
-                flex-direction: column;
-                width: 100%;
-            }
-            .contact-links a {
-                justify-content: center;
-            }
-        }
-
-        /* ===========================
-           UTILITY
-        =========================== */
-        .text-muted {
-            color: var(--text-muted);
-        }
-        .text-accent {
-            color: var(--accent);
-        }
-        .mt-1 {
-            margin-top: 6px;
-        }
-        .mt-2 {
-            margin-top: 12px;
-        }
-        .mb-1 {
-            margin-bottom: 6px;
-        }
-        .mb-2 {
-            margin-bottom: 12px;
-        }
-        .flex {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .gap-2 {
-            gap: 10px;
-        }
-        .w-full {
-            width: 100%;
-        }
-        .text-center {
-            text-align: center;
-        }
-
-        /* ===========================
-           RESUME CONTENT - VISIBLE FOR PDF GENERATION
+           RESUME CONTENT - HIDDEN FOR GENERATION
         =========================== */
         #resumeContent {
             position: absolute;
@@ -946,217 +605,437 @@
             background: #fff;
             padding: 40px;
             z-index: -1;
+            font-family: 'Inter', Arial, sans-serif;
+            color: #1a1a2e;
+            line-height: 1.6;
         }
+
+        /* ===========================
+           RESPONSIVE
+        =========================== */
+        @media (max-width: 1024px) {
+            .app-container {
+                grid-template-columns: 1fr;
+            }
+            .aside-panel {
+                position: relative;
+                top: 0;
+                flex-direction: row;
+                flex-wrap: wrap;
+                align-items: center;
+                padding: 16px 20px;
+                gap: 16px;
+            }
+            .aside-profile {
+                border-bottom: none;
+                padding-bottom: 0;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                text-align: left;
+                flex: 1;
+            }
+            .aside-avatar {
+                width: 56px;
+                height: 56px;
+                margin: 0;
+            }
+            .aside-nav {
+                flex-direction: row;
+                flex-wrap: wrap;
+                flex: 2;
+                justify-content: center;
+            }
+            .aside-nav button {
+                width: auto;
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+            .aside-nav button i {
+                width: auto;
+            }
+            .aside-stats {
+                grid-template-columns: repeat(4, 1fr);
+                flex: 1;
+            }
+            .aside-contact {
+                flex: 0 0 auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 12px; }
+            .main-content { padding: 24px 20px; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .aside-panel {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .aside-profile {
+                flex-direction: column;
+                text-align: center;
+            }
+            .aside-nav {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .aside-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .entry-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .footer {
+                flex-direction: column;
+                text-align: center;
+            }
+            .footer .left {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid { grid-template-columns: 1fr 1fr; }
+            .section-header h2 { font-size: 18px; }
+            .aside-nav button {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+            .aside-nav button i { display: none; }
+            .main-content { padding: 16px 12px; }
+        }
+
+        /* ===========================
+           UTILITY
+        =========================== */
+        .text-muted { color: var(--text-muted); }
+        .text-accent { color: var(--accent); }
+        .mt-1 { margin-top: 6px; }
+        .mt-2 { margin-top: 12px; }
+        .mb-1 { margin-bottom: 6px; }
+        .mb-2 { margin-bottom: 12px; }
+        .flex { display: flex; align-items: center; gap: 6px; }
+        .gap-2 { gap: 10px; }
+        .w-full { width: 100%; }
+        .text-center { text-align: center; }
     </style>
 </head>
 <body>
 
-    <div class="container">
+    <div class="app-container">
 
         <!-- ===========================
-        HERO / HEADER
+        ASIDE PANEL
         =========================== -->
-        <div class="hero">
-            <div class="hero-left">
-                <div class="avatar-wrapper">
-                    <div class="avatar" onclick="openImageModal()">
-                        <img src="milly.jpeg" alt="Naphtali Sunday" />
-                        <span class="status-dot"></span>
-                    </div>
+        <aside class="aside-panel">
+            <div class="aside-profile">
+                <div class="aside-avatar" onclick="openImageModal()">
+                    <img src="milly.jpeg" alt="Naphtali Sunday" />
                 </div>
-                <div class="name-title">
-                    <h1>Naphtali <span>Sunday</span></h1>
-                    <div class="title">
-                        <i class="fas fa-code"></i> Web Developer &middot; Data Analyst &middot; MEAL Specialist
-                    </div>
-                    <div class="badge-group">
-                        <span class="badge"><i class="fas fa-map-pin"></i> Yola, Adamawa, Nigeria</span>
-                        <span class="badge"><i class="fas fa-clock"></i> 6+ Years Experience</span>
-                        <span class="badge primary"><i class="fas fa-bolt"></i> Available</span>
-                        <span class="badge success"><i class="fas fa-globe-africa"></i> USAID/PEPFAR</span>
-                        <span class="badge"><i class="fas fa-code"></i> Full-Stack Developer</span>
-                    </div>
+                <div>
+                    <div class="aside-name">Naphtali <span>Sunday</span></div>
+                    <div class="aside-title">Web Dev · Data Analyst · MEAL</div>
                 </div>
             </div>
-            <div class="hero-right">
-                <span class="availability"><i class="fas fa-circle"></i> Open to Work</span>
-                <div class="contact-links">
-                    <a href="mailto:naphtalisunday2944@gmail.com"><i class="fas fa-envelope"></i> Email</a>
-                    <a href="https://www.linkedin.com/in/naphtali-sunday-aa6201244" target="_blank"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
-                    <a href="https://github.com/sundaymilly" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-                    <div class="resume-btn-wrapper">
-                        <a href="#" class="resume-btn" id="resumeToggle"><i class="fas fa-file-pdf"></i> Resume</a>
-                        <div class="download-options" id="downloadOptions">
-                            <a href="#" onclick="downloadResume('pdf'); return false;">
-                                <i class="fas fa-file-pdf" style="color:#dc3545;"></i> Download as PDF
-                            </a>
-                            <a href="#" onclick="downloadResume('doc'); return false;">
-                                <i class="fas fa-file-word" style="color:#2b5797;"></i> Download as Word
-                            </a>
-                            <a href="#" onclick="downloadResume('txt'); return false;">
-                                <i class="fas fa-file-alt" style="color:#6c757d;"></i> Download as Text
-                            </a>
-                        </div>
-                    </div>
+
+            <nav class="aside-nav">
+                <button class="active" onclick="switchPage('about', this)">
+                    <i class="fas fa-user"></i> About
+                </button>
+                <button onclick="switchPage('skills', this)">
+                    <i class="fas fa-code"></i> Skills
+                </button>
+                <button onclick="switchPage('experience', this)">
+                    <i class="fas fa-briefcase"></i> Experience
+                </button>
+                <button onclick="switchPage('education', this)">
+                    <i class="fas fa-graduation-cap"></i> Education
+                </button>
+                <button onclick="switchPage('achievements', this)">
+                    <i class="fas fa-trophy"></i> Achievements
+                </button>
+            </nav>
+
+            <div class="aside-stats">
+                <div class="aside-stat-item">
+                    <div class="num">6+</div>
+                    <div class="lbl">Years</div>
+                </div>
+                <div class="aside-stat-item">
+                    <div class="num">100+</div>
+                    <div class="lbl">Trained</div>
+                </div>
+                <div class="aside-stat-item">
+                    <div class="num">99%</div>
+                    <div class="lbl">Data</div>
+                </div>
+                <div class="aside-stat-item">
+                    <div class="num">20+</div>
+                    <div class="lbl">Sites</div>
                 </div>
             </div>
-        </div>
+
+            <div class="aside-contact">
+                <a href="mailto:naphtalisunday2944@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+                <a href="https://www.linkedin.com/in/naphtali-sunday-aa6201244" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/sundaymilly" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="#" onclick="downloadResume('pdf'); return false;" title="Download PDF Resume"><i class="fas fa-file-pdf"></i></a>
+            </div>
+        </aside>
 
         <!-- ===========================
-        STATS / METRICS
+        MAIN CONTENT (PAGES)
         =========================== -->
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-number">6+</div>
-                <div class="stat-label">Years Experience</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">100+</div>
-                <div class="stat-label">Trained Professionals</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">99%</div>
-                <div class="stat-label">Data Integrity</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">20+</div>
-                <div class="stat-label">Field Sites</div>
-            </div>
-        </div>
+        <main class="main-content">
+            <div class="page-container">
 
-        <!-- ===========================
-        MAIN GRID
-        =========================== -->
-        <div class="grid-2">
-
-            <!-- ===== LEFT COLUMN ===== -->
-            <div>
-
-                <!-- ABOUT -->
-                <div class="section">
+                <!-- ===== PAGE 1: ABOUT ===== -->
+                <div class="page-section active" id="page-about">
                     <div class="section-header">
                         <div class="icon"><i class="fas fa-user"></i></div>
                         <h2>About Me</h2>
                     </div>
-                    <div class="section-content">
-                        <p class="about-text">
-                            I'm <strong>Naphtali Sunday</strong> a <strong>Web Developer</strong>, <strong>Data Analyst</strong>,
-                            and <strong>MEAL Specialist</strong> with <strong>6+ years</strong> of experience building
-                            <span class="highlight">web applications</span>, <span class="highlight">data systems</span>,
-                            and leading <span class="highlight">capacity building</span> initiatives.
-                        </p>
-                        <p class="about-text mt-1">
-                            I specialize in <strong>full-stack web development</strong>  building custom web apps,
-                            websites, and data-driven platforms. I've worked extensively with
-                            <strong>USAID/PEPFAR-funded</strong> health programs across Northeast Nigeria,
-                            managing data systems, ensuring <strong>99% data integrity</strong>, and training
-                            <strong>100+ professionals</strong> in data management and digital skills.
-                        </p>
-                        <p class="about-text mt-1">
-                            My work bridges the gap between <strong>technology and impact</strong> 
-                            from designing <strong>web-based restaurant systems</strong> to tracking
-                            <strong>HIV case management data</strong> with <strong>LAMIS</strong> and <strong>DHIS2</strong>.
-                            I'm passionate about using <span class="highlight">code</span> and <span class="highlight">data</span>
-                            to solve real-world problems in <strong>health, education, and development</strong>.
-                        </p>
-                        <div class="about-highlights">
-                            <span class="highlight-item"><i class="fas fa-check-circle"></i> Full-Stack Web Developer</span>
-                            <span class="highlight-item"><i class="fas fa-check-circle"></i> USAID/PEPFAR Experience</span>
-                            <span class="highlight-item"><i class="fas fa-check-circle"></i> 100+ Professionals Trained</span>
-                            <span class="highlight-item"><i class="fas fa-check-circle"></i> MEAL &amp; Data Systems Expert</span>
-                            <span class="highlight-item"><i class="fas fa-check-circle"></i> LAMIS &amp; DHIS2 Specialist</span>
-                            <span class="highlight-item"><i class="fas fa-check-circle"></i> NGO &amp; Development Sector</span>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">6+</div>
+                            <div class="stat-label">Years Experience</div>
                         </div>
+                        <div class="stat-card">
+                            <div class="stat-number">100+</div>
+                            <div class="stat-label">Trained Professionals</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">99%</div>
+                            <div class="stat-label">Data Integrity</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">20+</div>
+                            <div class="stat-label">Field Sites</div>
+                        </div>
+                    </div>
+
+                    <p class="about-text">
+                        I'm <strong>Naphtali Sunday</strong> a <strong>Web Developer</strong>, <strong>Data Analyst</strong>,
+                        and <strong>MEAL Specialist</strong> with <strong>6+ years</strong> of experience building
+                        <span class="highlight">web applications</span>, <span class="highlight">data systems</span>,
+                        and leading <span class="highlight">capacity building</span> initiatives.
+                    </p>
+                    <p class="about-text mt-1">
+                        I specialize in <strong>full-stack web development</strong> building custom web apps,
+                        websites, and data-driven platforms. I've worked extensively with
+                        <strong>USAID/PEPFAR-funded</strong> health programs across Northeast Nigeria,
+                        managing data systems, ensuring <strong>99% data integrity</strong>, and training
+                        <strong>100+ professionals</strong> in data management and digital skills.
+                    </p>
+                    <p class="about-text mt-1">
+                        My work bridges the gap between <strong>technology and impact</strong> 
+                        from designing <strong>web-based restaurant systems</strong> to tracking
+                        <strong>HIV case management data</strong> with <strong>LAMIS</strong> and <strong>DHIS2</strong>.
+                        I'm passionate about using <span class="highlight">code</span> and <span class="highlight">data</span>
+                        to solve real-world problems in <strong>health, education, and development</strong>.
+                    </p>
+
+                    <div class="about-highlights">
+                        <span class="highlight-item"><i class="fas fa-check-circle"></i> Full-Stack Web Developer</span>
+                        <span class="highlight-item"><i class="fas fa-check-circle"></i> USAID/PEPFAR Experience</span>
+                        <span class="highlight-item"><i class="fas fa-check-circle"></i> 100+ Professionals Trained</span>
+                        <span class="highlight-item"><i class="fas fa-check-circle"></i> MEAL &amp; Data Systems Expert</span>
+                        <span class="highlight-item"><i class="fas fa-check-circle"></i> LAMIS &amp; DHIS2 Specialist</span>
+                        <span class="highlight-item"><i class="fas fa-check-circle"></i> NGO &amp; Development Sector</span>
                     </div>
                 </div>
 
-                <!-- SKILLS -->
-                <div class="section">
+                <!-- ===== PAGE 2: SKILLS ===== -->
+                <div class="page-section" id="page-skills">
                     <div class="section-header">
                         <div class="icon"><i class="fas fa-code"></i></div>
                         <h2>Technical Skills</h2>
                     </div>
-                    <div class="section-content">
-                        <div class="skill-category">
-                            <span class="cat-label">Web Development</span>
-                            <div class="skillset">
-                                <span class="skill-tag">HTML5</span>
-                                <span class="skill-tag">CSS3</span>
-                                <span class="skill-tag">JavaScript</span>
-                                <span class="skill-tag">PHP</span>
-                                <span class="skill-tag">MySQL</span>
-                                <span class="skill-tag">React</span>
-                                <span class="skill-tag">Node.js</span>
-                                <span class="skill-tag">Bootstrap</span>
-                                <span class="skill-tag">REST APIs</span>
-                            </div>
+
+                    <div class="skill-category">
+                        <span class="cat-label">Web Development</span>
+                        <div class="skillset">
+                            <span class="skill-tag">HTML5</span>
+                            <span class="skill-tag">CSS3</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">PHP</span>
+                            <span class="skill-tag">MySQL</span>
+                            <span class="skill-tag">React</span>
+                            <span class="skill-tag">Node.js</span>
+                            <span class="skill-tag">Bootstrap</span>
+                            <span class="skill-tag">REST APIs</span>
                         </div>
-                        <div class="skill-category">
-                            <span class="cat-label">Data &amp; MEAL Systems</span>
-                            <div class="skillset">
-                                <span class="skill-tag">LAMIS</span>
-                                <span class="skill-tag">DHIS2</span>
-                                <span class="skill-tag">SQL</span>
-                                <span class="skill-tag">Data Quality Assurance</span>
-                                <span class="skill-tag">Indicator Tracking</span>
-                                <span class="skill-tag">Donor Reporting</span>
-                                <span class="skill-tag">Strategic Information</span>
-                                <span class="skill-tag">ETL Processes</span>
-                            </div>
+                    </div>
+                    <div class="skill-category">
+                        <span class="cat-label">Data &amp; MEAL Systems</span>
+                        <div class="skillset">
+                            <span class="skill-tag">LAMIS</span>
+                            <span class="skill-tag">DHIS2</span>
+                            <span class="skill-tag">SQL</span>
+                            <span class="skill-tag">Data Quality Assurance</span>
+                            <span class="skill-tag">Indicator Tracking</span>
+                            <span class="skill-tag">Donor Reporting</span>
+                            <span class="skill-tag">Strategic Information</span>
+                            <span class="skill-tag">ETL Processes</span>
                         </div>
-                        <div class="skill-category">
-                            <span class="cat-label">Capacity Building</span>
-                            <div class="skillset">
-                                <span class="skill-tag">Training Facilitation</span>
-                                <span class="skill-tag">Coaching &amp; Mentorship</span>
-                                <span class="skill-tag">Community Engagement</span>
-                                <span class="skill-tag">Stakeholder Coordination</span>
-                                <span class="skill-tag">Report Writing</span>
-                            </div>
+                    </div>
+                    <div class="skill-category">
+                        <span class="cat-label">Capacity Building</span>
+                        <div class="skillset">
+                            <span class="skill-tag">Training Facilitation</span>
+                            <span class="skill-tag">Coaching &amp; Mentorship</span>
+                            <span class="skill-tag">Community Engagement</span>
+                            <span class="skill-tag">Stakeholder Coordination</span>
+                            <span class="skill-tag">Report Writing</span>
                         </div>
-                        <div class="skill-category">
-                            <span class="cat-label">Tools &amp; Design</span>
-                            <div class="skillset">
-                                <span class="skill-tag">UI/UX Design</span>
-                                <span class="skill-tag">Adobe Photoshop</span>
-                                <span class="skill-tag">Microsoft Office Suite</span>
-                                <span class="skill-tag">Git</span>
-                                <span class="skill-tag">Figma</span>
-                            </div>
+                    </div>
+                    <div class="skill-category">
+                        <span class="cat-label">Tools &amp; Design</span>
+                        <div class="skillset">
+                            <span class="skill-tag">UI/UX Design</span>
+                            <span class="skill-tag">Adobe Photoshop</span>
+                            <span class="skill-tag">Microsoft Office Suite</span>
+                            <span class="skill-tag">Git</span>
+                            <span class="skill-tag">Figma</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- EDUCATION -->
-                <div class="section">
+                <!-- ===== PAGE 3: EXPERIENCE ===== -->
+                <div class="page-section" id="page-experience">
+                    <div class="section-header">
+                        <div class="icon"><i class="fas fa-briefcase"></i></div>
+                        <h2>Professional Experience</h2>
+                    </div>
+
+                    <div class="entry">
+                        <div class="entry-header">
+                            <span class="entry-title">M&E Assistant/DEC</span>
+                            <span class="entry-date">2025 – 2026</span>
+                        </div>
+                        <div class="entry-org">Society for Family Health (SFH) · USAID/PEPFAR CARE 2 Project</div>
+                        <ul class="entry-desc">
+                            <li>Provide technical oversight for HIV case management data systems using <strong>LAMIS</strong> and <strong>DHIS2</strong>.</li>
+                            <li>Lead end-to-end data management for <strong>20+ field sites</strong>, achieving <strong>99% data completeness</strong>.</li>
+                            <li>Track referral, linkage, retention, and adherence data to assess program performance.</li>
+                            <li>Strengthen referral pathway documentation for GBV survivors and vulnerable populations.</li>
+                            <li>Facilitate monthly data review meetings translating complex data into actionable insights.</li>
+                            <li>Provide hands-on coaching on data management and ethical case documentation.</li>
+                            <li>Generate monthly, quarterly, and donor reports for <strong>USAID/PEPFAR</strong>.</li>
+                        </ul>
+                        <div class="entry-tags">
+                            <span>LAMIS</span><span>DHIS2</span><span>SQL</span><span>Data Quality</span><span>Donor Reporting</span>
+                        </div>
+                    </div>
+
+                    <div class="entry">
+                        <div class="entry-header">
+                            <span class="entry-title">MEAL Assistant</span>
+                            <span class="entry-date">September 2026 – Present</span>
+                        </div>
+                        <div class="entry-org">Achieving Health Nigeria Initiative (AHNi) · USAID/PEPFAR ACE 1 · Yola, Adamawa State</div>
+                        <ul class="entry-desc">
+                            <li>Conduct data entry and monitoring of programme and client-level records, ensuring accuracy, completeness, and consistency across supported health facilities.</li>
+                            <li>Support data upload and reporting, including reporting and uploading records to the Electronic Medical Record (EMR) system and the National Data Repository (NDR), in line with reporting timelines and data standards.</li>
+                            <li>Carry out data reconciliation and analysis, cross-checking records across data systems to identify and resolve discrepancies and support accurate programme reporting.</li>
+                        </ul>
+                        <div class="entry-tags">
+                            <span>EMR</span><span>NDR</span><span>Data Entry</span><span>Data Reconciliation</span><span>Data Analysis</span><span>Programme Reporting</span>
+                        </div>
+                    </div>
+
+                    <div class="entry">
+                        <div class="entry-header">
+                            <span class="entry-title">Web Developer &amp; Data Analyst</span>
+                            <span class="entry-date">2021 – 2023</span>
+                        </div>
+                        <div class="entry-org">Freelance &amp; Contract Projects</div>
+                        <ul class="entry-desc">
+                            <li>Built custom <strong>web applications</strong> and websites for clients across various sectors.</li>
+                            <li>Designed and deployed a <strong>Web-based Integrated Restaurant System</strong> as a final-year project.</li>
+                            <li>Developed data-driven platforms with <strong>SQL</strong> and <strong>PHP</strong> for real-time reporting.</li>
+                            <li>Created <strong>interactive dashboards</strong> using modern frontend technologies.</li>
+                        </ul>
+                        <div class="entry-tags">
+                            <span>PHP</span><span>MySQL</span><span>JavaScript</span><span>React</span><span>APIs</span>
+                        </div>
+                    </div>
+
+                    <div class="entry">
+                        <div class="entry-header">
+                            <span class="entry-title">Financial Advisor</span>
+                            <span class="entry-date">2023 – 2025</span>
+                        </div>
+                        <div class="entry-org">Heirs Life Assurance · UBA Bank, Yola</div>
+                        <ul class="entry-desc">
+                            <li>Conducted financial consultations for <strong>100+ clients</strong>, developing tailored insurance plans.</li>
+                            <li>Maintained deep knowledge of life, health, and property insurance products.</li>
+                            <li>Achieved <strong>85% client retention</strong> rate.</li>
+                            <li>Maintained <strong>100% compliance</strong> with industry regulations.</li>
+                        </ul>
+                        <div class="entry-tags">
+                            <span>Financial Analysis</span><span>Client Relations</span><span>Compliance</span>
+                        </div>
+                    </div>
+
+                    <div class="entry">
+                        <div class="entry-header">
+                            <span class="entry-title">Classroom Teacher (NYSC)</span>
+                            <span class="entry-date">2022 – 2023</span>
+                        </div>
+                        <div class="entry-org">LCCN No:1 Academy School, Yola</div>
+                        <ul class="entry-desc">
+                            <li>Integrated digital tools into curriculum, enhancing student engagement.</li>
+                            <li>Designed assessments to monitor progress and tailor instructional strategies.</li>
+                            <li>Achieved <strong>20% improvement</strong> in student test scores.</li>
+                        </ul>
+                        <div class="entry-tags">
+                            <span>Teaching</span><span>Digital Tools</span><span>Student Mentoring</span>
+                        </div>
+                    </div>
+
+                    <div class="entry">
+                        <div class="entry-header">
+                            <span class="entry-title">Computer Operator / Graphic Designer</span>
+                            <span class="entry-date">2017 – 2020</span>
+                        </div>
+                        <div class="entry-org">Isme Cybercafe, Jalingo</div>
+                        <ul class="entry-desc">
+                            <li>Managed data entry and database maintenance with strict data privacy protocols.</li>
+                            <li>Produced operational reports and error logs.</li>
+                            <li>Delivered graphic design services for clients.</li>
+                        </ul>
+                        <div class="entry-tags">
+                            <span>Data Entry</span><span>Graphic Design</span><span>Reporting</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== PAGE 4: EDUCATION & CERTIFICATIONS ===== -->
+                <div class="page-section" id="page-education">
                     <div class="section-header">
                         <div class="icon"><i class="fas fa-graduation-cap"></i></div>
-                        <h2>Education</h2>
+                        <h2>Education &amp; Certifications</h2>
                     </div>
-                    <div class="section-content">
-                        <div class="entry">
-                            <div class="entry-header">
-                                <span class="entry-title">B.Sc. Computer Science</span>
-                                <span class="entry-date">2017 – 2022</span>
-                            </div>
-                            <div class="entry-org">Taraba State University, Jalingo</div>
-                            <div class="entry-desc" style="list-style:none;padding-left:0;margin-top:2px;">
-                                <span style="font-size:13px;color:var(--text-secondary);">
-                                    <i class="fas fa-star" style="color:var(--accent);font-size:11px;"></i>
-                                    Final Year Project: <strong>Web-based Integrated Restaurant System</strong>
-                                </span>
-                            </div>
+
+                    <div class="entry">
+                        <div class="entry-header">
+                            <span class="entry-title">B.Sc. Computer Science</span>
+                            <span class="entry-date">2017 – 2022</span>
+                        </div>
+                        <div class="entry-org">Taraba State University, Jalingo</div>
+                        <div style="font-size:13px; color:var(--text-secondary); margin-top:4px;">
+                            <i class="fas fa-star" style="color:var(--accent);font-size:11px;"></i>
+                            Final Year Project: <strong>Web-based Integrated Restaurant System</strong>
                         </div>
                     </div>
-                </div>
 
-                <!-- CERTIFICATIONS -->
-                <div class="section">
-                    <div class="section-header">
-                        <div class="icon"><i class="fas fa-certificate"></i></div>
-                        <h2>Certifications</h2>
-                    </div>
-                    <div class="section-content">
+                    <div style="margin-top: 20px;">
+                        <h3 style="font-size: 14px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">Certifications</h3>
                         <div class="cert-item">
                             <i class="fas fa-badge-check"></i>
                             <span>Structured Query Language (SQL)</span>
@@ -1182,198 +1061,9 @@
                             <span class="cert-date">2022</span>
                         </div>
                     </div>
-                </div>
 
-            </div>
-
-            <!-- ===== RIGHT COLUMN ===== -->
-
-            <div>
-
-                <!-- EXPERIENCE -->
-                <div class="section">
-                    <div class="section-header">
-                        <div class="icon"><i class="fas fa-briefcase"></i></div>
-                        <h2>Experience</h2>
-                    </div>
-                    <div class="section-content">
-
-                        <div class="entry">
-                            <div class="entry-header">
-                                <span class="entry-title">M&E Assistant/DEC</span>
-                                <span class="entry-date">2025 – 2026</span>
-                            </div>
-                            <div class="entry-org">Society for Family Health (SFH) · USAID/PEPFAR CARE 2 Project</div>
-                            <ul class="entry-desc">
-                                <li>Provide technical oversight for HIV case management data systems using <strong>LAMIS</strong> and <strong>DHIS2</strong>.</li>
-                                <li>Lead end-to-end data management for <strong>20+ field sites</strong>, achieving <strong>99% data completeness</strong>.</li>
-                                <li>Track referral, linkage, retention, and adherence data to assess program performance.</li>
-                                <li>Strengthen referral pathway documentation for GBV survivors and vulnerable populations.</li>
-                                <li>Facilitate monthly data review meetings translating complex data into actionable insights.</li>
-                                <li>Provide hands-on coaching on data management and ethical case documentation.</li>
-                                <li>Generate monthly, quarterly, and donor reports for <strong>USAID/PEPFAR</strong>.</li>
-                                <li>Support Strategic Information meetings and performance monitoring activities.</li>
-                            </ul>
-                            <div class="entry-tags">
-                                <span>LAMIS</span>
-                                <span>DHIS2</span>
-                                <span>SQL</span>
-                                <span>Data Quality</span>
-                                <span>Donor Reporting</span>
-                            </div>
-                        </div>
-<div class="entry">
-    <div class="entry-header">
-        <span class="entry-title">MEAL Assistant</span>
-        <span class="entry-date">September 2026 – Present</span>
-    </div>
-    <div class="entry-org">Achieving Health Nigeria Initiative (AHNi) · USAID/PEPFAR ACE 1 · Yola, Adamawa State</div>
-    <ul class="entry-desc">
-        <li>Conduct data entry and monitoring of programme and client-level records, ensuring accuracy, completeness, and consistency across supported health facilities.</li>
-        <li>Support data upload and reporting, including reporting and uploading records to the Electronic Medical Record (EMR) system and the National Data Repository (NDR), in line with reporting timelines and data standards.</li>
-        <li>Carry out data reconciliation and analysis, cross-checking records across data systems to identify and resolve discrepancies and support accurate programme reporting.</li>
-    </ul>
-    <div class="entry-tags">
-        <span>EMR</span>
-        <span>NDR</span>
-        <span>Data Entry</span>
-        <span>Data Reconciliation</span>
-        <span>Data Analysis</span>
-        <span>Programme Reporting</span>
-    </div>
-</div>
-
-                        <div class="entry">
-                            <div class="entry-header">
-                                <span class="entry-title">Web Developer &amp; Data Analyst</span>
-                                <span class="entry-date">2021 – 2023</span>
-                            </div>
-                            <div class="entry-org">Freelance &amp; Contract Projects</div>
-                            <ul class="entry-desc">
-                                <li>Built custom <strong>web applications</strong> and websites for clients across various sectors.</li>
-                                <li>Designed and deployed a <strong>Web-based Integrated Restaurant System</strong> as a final-year project.</li>
-                                <li>Developed data-driven platforms with <strong>SQL</strong> and <strong>PHP</strong> for real-time reporting.</li>
-                                <li>Created <strong>interactive dashboards</strong> using modern frontend technologies.</li>
-                            </ul>
-                            <div class="entry-tags">
-                                <span>PHP</span>
-                                <span>MySQL</span>
-                                <span>JavaScript</span>
-                                <span>React</span>
-                                <span>APIs</span>
-                            </div>
-                        </div>
-
-                        <div class="entry">
-                            <div class="entry-header">
-                                <span class="entry-title">Financial Advisor</span>
-                                <span class="entry-date">2023 – 2025</span>
-                            </div>
-                            <div class="entry-org">Heirs Life Assurance · UBA Bank, Yola</div>
-                            <ul class="entry-desc">
-                                <li>Conducted financial consultations for <strong>100+ clients</strong>, developing tailored insurance plans.</li>
-                                <li>Maintained deep knowledge of life, health, and property insurance products.</li>
-                                <li>Achieved <strong>85% client retention</strong> rate.</li>
-                                <li>Maintained <strong>100% compliance</strong> with industry regulations.</li>
-                            </ul>
-                            <div class="entry-tags">
-                                <span>Financial Analysis</span>
-                                <span>Client Relations</span>
-                                <span>Compliance</span>
-                            </div>
-                        </div>
-
-                        <div class="entry">
-                            <div class="entry-header">
-                                <span class="entry-title">Classroom Teacher (NYSC)</span>
-                                <span class="entry-date">2022 – 2023</span>
-                            </div>
-                            <div class="entry-org">LCCN No:1 Academy School, Yola</div>
-                            <ul class="entry-desc">
-                                <li>Integrated digital tools into curriculum, enhancing student engagement.</li>
-                                <li>Designed assessments to monitor progress and tailor instructional strategies.</li>
-                                <li>Achieved <strong>20% improvement</strong> in student test scores.</li>
-                            </ul>
-                            <div class="entry-tags">
-                                <span>Teaching</span>
-                                <span>Digital Tools</span>
-                                <span>Student Mentoring</span>
-                            </div>
-                        </div>
-
-                        <div class="entry">
-                            <div class="entry-header">
-                                <span class="entry-title">Computer Operator / Graphic Designer</span>
-                                <span class="entry-date">2017 – 2020</span>
-                            </div>
-                            <div class="entry-org">Isme Cybercafe, Jalingo</div>
-                            <ul class="entry-desc">
-                                <li>Managed data entry and database maintenance with strict data privacy protocols.</li>
-                                <li>Produced operational reports and error logs.</li>
-                                <li>Delivered graphic design services for clients.</li>
-                            </ul>
-                            <div class="entry-tags">
-                                <span>Data Entry</span>
-                                <span>Graphic Design</span>
-                                <span>Reporting</span>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- ACHIEVEMENTS -->
-                <div class="section">
-                    <div class="section-header">
-                        <div class="icon"><i class="fas fa-trophy"></i></div>
-                        <h2>Key Achievements</h2>
-                    </div>
-                    <div class="section-content">
-                        <div class="achievement-item">
-                            <div class="ach-title"><i class="fas fa-check-circle"></i> 99% Data Integrity Achievement</div>
-                            <div class="ach-desc">
-                                Spearheaded data quality improvement initiatives across <strong>20+ field sites</strong>,
-                                elevating data completeness from <strong>85% to 99%</strong>.
-                            </div>
-                        </div>
-                        <div class="achievement-item">
-                            <div class="ach-title"><i class="fas fa-graduation-cap"></i> Technology-Enhanced Learning Impact</div>
-                            <div class="ach-desc">
-                                Introduced technology-driven teaching tools leading to a <strong>20% improvement</strong>
-                                in average student test scores.
-                            </div>
-                        </div>
-                        <div class="achievement-item">
-                            <div class="ach-title"><i class="fas fa-code"></i> End-to-End System Development</div>
-                            <div class="ach-desc">
-                                Designed and deployed a fully functional <strong>"Web-based Integrated Restaurant System"</strong>
-                                as a final-year project.
-                            </div>
-                        </div>
-                        <div class="achievement-item">
-                            <div class="ach-title"><i class="fas fa-users"></i> Capacity Building &amp; Training</div>
-                            <div class="ach-desc">
-                                Successfully trained <strong>100+ individuals</strong> across various cohorts in computer
-                                literacy, graphic design, programming, and data management.
-                            </div>
-                        </div>
-                        <div class="achievement-item">
-                            <div class="ach-title"><i class="fas fa-handshake"></i> Regulatory Compliance &amp; Client Retention</div>
-                            <div class="ach-desc">
-                                Maintained <strong>100% compliance</strong> with industry regulations while achieving a
-                                <strong>85% client retention</strong> rate.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- LANGUAGES -->
-                <div class="section">
-                    <div class="section-header">
-                        <div class="icon"><i class="fas fa-language"></i></div>
-                        <h2>Languages</h2>
-                    </div>
-                    <div class="section-content">
+                    <div style="margin-top: 20px;">
+                        <h3 style="font-size: 14px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">Languages</h3>
                         <div style="display:flex;flex-wrap:wrap;gap:12px;">
                             <span style="display:flex;align-items:center;gap:6px;font-size:14px;font-weight:500;">
                                 🇬🇧 English <span style="font-size:11px;color:var(--text-muted);font-weight:400;">(Professional)</span>
@@ -1388,31 +1078,66 @@
                     </div>
                 </div>
 
-            </div>
-            <!-- end right column -->
+                <!-- ===== PAGE 5: ACHIEVEMENTS ===== -->
+                <div class="page-section" id="page-achievements">
+                    <div class="section-header">
+                        <div class="icon"><i class="fas fa-trophy"></i></div>
+                        <h2>Key Achievements</h2>
+                    </div>
 
-        </div>
-        <!-- end grid-2 -->
+                    <div class="achievement-item">
+                        <div class="ach-title"><i class="fas fa-check-circle"></i> 99% Data Integrity Achievement</div>
+                        <div class="ach-desc">
+                            Spearheaded data quality improvement initiatives across <strong>20+ field sites</strong>,
+                            elevating data completeness from <strong>85% to 99%</strong>.
+                        </div>
+                    </div>
+                    <div class="achievement-item">
+                        <div class="ach-title"><i class="fas fa-graduation-cap"></i> Technology-Enhanced Learning Impact</div>
+                        <div class="ach-desc">
+                            Introduced technology-driven teaching tools leading to a <strong>20% improvement</strong>
+                            in average student test scores.
+                        </div>
+                    </div>
+                    <div class="achievement-item">
+                        <div class="ach-title"><i class="fas fa-code"></i> End-to-End System Development</div>
+                        <div class="ach-desc">
+                            Designed and deployed a fully functional <strong>"Web-based Integrated Restaurant System"</strong>
+                            as a final-year project.
+                        </div>
+                    </div>
+                    <div class="achievement-item">
+                        <div class="ach-title"><i class="fas fa-users"></i> Capacity Building &amp; Training</div>
+                        <div class="ach-desc">
+                            Successfully trained <strong>100+ individuals</strong> across various cohorts in computer
+                            literacy, graphic design, programming, and data management.
+                        </div>
+                    </div>
+                    <div class="achievement-item">
+                        <div class="ach-title"><i class="fas fa-handshake"></i> Regulatory Compliance &amp; Client Retention</div>
+                        <div class="ach-desc">
+                            Maintained <strong>100% compliance</strong> with industry regulations while achieving a
+                            <strong>85% client retention</strong> rate.
+                        </div>
+                    </div>
+                </div>
 
-        <!-- ===========================
-        FOOTER
-        =========================== -->
-        <div class="footer">
-            <div class="left">
-                <span><i class="fas fa-code"></i> Web Developer · Data Analyst · MEAL Specialist</span>
-                <span><i class="far fa-calendar-alt"></i> 6+ years experience</span>
-                <span><i class="fas fa-map-pin"></i> Yola, Adamawa</span>
             </div>
-            <div class="right">
-                <a href="https://www.linkedin.com/in/naphtali-sunday-aa6201244" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                <a href="https://github.com/sundaymilly" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="#" aria-label="Medium"><i class="fab fa-medium"></i></a>
-            </div>
-        </div>
 
+            <!-- FOOTER -->
+            <div class="footer">
+                <div class="left">
+                    <span><i class="fas fa-code"></i> Web Developer · Data Analyst · MEAL Specialist</span>
+                    <span><i class="far fa-calendar-alt"></i> 6+ years experience</span>
+                    <span><i class="fas fa-map-pin"></i> Yola, Adamawa</span>
+                </div>
+                <div class="right" style="display:flex;gap:12px;">
+                    <a href="https://www.linkedin.com/in/naphtali-sunday-aa6201244" target="_blank" style="color:var(--text-muted);font-size:18px;"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com/sundaymilly" target="_blank" style="color:var(--text-muted);font-size:18px;"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </main>
     </div>
-    <!-- end container -->
 
     <!-- ===========================
     PROFILE IMAGE MODAL
@@ -1427,7 +1152,7 @@
     </div>
 
     <!-- ===========================
-    RESUME CONTENT (Hidden off-screen but visible to html2pdf)
+    RESUME CONTENT (Hidden for accurate generation)
     =========================== -->
     <div id="resumeContent">
         <div style="font-family: 'Inter', Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 40px; color: #1a1a2e; line-height: 1.6; background: #fff;">
@@ -1506,7 +1231,7 @@
                 <div style="margin-top: 8px;">
                     <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap;">
                         <strong style="font-size: 14px; color: #0f172a;">M&E Assistant/DEC</strong>
-                        <span style="font-size: 12px; color: #94a3b8;">2022 – Present</span>
+                        <span style="font-size: 12px; color: #94a3b8;">2025 – 2026</span>
                     </div>
                     <div style="font-size: 13px; color: #1a5a8c; font-weight: 600;">Society for Family Health (SFH) · USAID/PEPFAR CARE 2 Project</div>
                     <ul style="font-size: 13px; color: #475569; padding-left: 20px; margin: 4px 0 8px 0; line-height: 1.7;">
@@ -1519,8 +1244,19 @@
                     </ul>
 
                     <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; margin-top: 6px;">
+                        <strong style="font-size: 14px; color: #0f172a;">MEAL Assistant</strong>
+                        <span style="font-size: 12px; color: #94a3b8;">September 2026 – Present</span>
+                    </div>
+                    <div style="font-size: 13px; color: #1a5a8c; font-weight: 600;">Achieving Health Nigeria Initiative (AHNi) · USAID/PEPFAR ACE 1 · Yola, Adamawa State</div>
+                    <ul style="font-size: 13px; color: #475569; padding-left: 20px; margin: 4px 0 8px 0; line-height: 1.7;">
+                        <li>Conduct data entry and monitoring of programme and client-level records, ensuring accuracy, completeness, and consistency across supported health facilities.</li>
+                        <li>Support data upload and reporting, including reporting and uploading records to the Electronic Medical Record (EMR) system and the National Data Repository (NDR), in line with reporting timelines and data standards.</li>
+                        <li>Carry out data reconciliation and analysis, cross-checking records across data systems to identify and resolve discrepancies and support accurate programme reporting.</li>
+                    </ul>
+
+                    <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; margin-top: 6px;">
                         <strong style="font-size: 14px; color: #0f172a;">Web Developer &amp; Data Analyst</strong>
-                        <span style="font-size: 12px; color: #94a3b8;">2021 – Present</span>
+                        <span style="font-size: 12px; color: #94a3b8;">2021 – 2023</span>
                     </div>
                     <div style="font-size: 13px; color: #1a5a8c; font-weight: 600;">Freelance &amp; Contract Projects</div>
                     <ul style="font-size: 13px; color: #475569; padding-left: 20px; margin: 4px 0 8px 0; line-height: 1.7;">
@@ -1531,7 +1267,7 @@
 
                     <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; margin-top: 6px;">
                         <strong style="font-size: 14px; color: #0f172a;">Financial Advisor</strong>
-                        <span style="font-size: 12px; color: #94a3b8;">2020 – 2021</span>
+                        <span style="font-size: 12px; color: #94a3b8;">2023 – 2025</span>
                     </div>
                     <div style="font-size: 13px; color: #1a5a8c; font-weight: 600;">Heirs Life Assurance · UBA Bank, Yola</div>
                     <ul style="font-size: 13px; color: #475569; padding-left: 20px; margin: 4px 0 8px 0; line-height: 1.7;">
@@ -1542,12 +1278,23 @@
 
                     <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; margin-top: 6px;">
                         <strong style="font-size: 14px; color: #0f172a;">Classroom Teacher (NYSC)</strong>
-                        <span style="font-size: 12px; color: #94a3b8;">2019 – 2020</span>
+                        <span style="font-size: 12px; color: #94a3b8;">2022 – 2023</span>
                     </div>
                     <div style="font-size: 13px; color: #1a5a8c; font-weight: 600;">LCCN No:1 Academy School, Yola</div>
                     <ul style="font-size: 13px; color: #475569; padding-left: 20px; margin: 4px 0 8px 0; line-height: 1.7;">
                         <li>Integrated digital tools into curriculum, enhancing student engagement.</li>
                         <li>Achieved 20% improvement in student test scores.</li>
+                    </ul>
+                    
+                    <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; margin-top: 6px;">
+                        <strong style="font-size: 14px; color: #0f172a;">Computer Operator / Graphic Designer</strong>
+                        <span style="font-size: 12px; color: #94a3b8;">2017 – 2020</span>
+                    </div>
+                    <div style="font-size: 13px; color: #1a5a8c; font-weight: 600;">Isme Cybercafe, Jalingo</div>
+                    <ul style="font-size: 13px; color: #475569; padding-left: 20px; margin: 4px 0 8px 0; line-height: 1.7;">
+                        <li>Managed data entry and database maintenance with strict data privacy protocols.</li>
+                        <li>Produced operational reports and error logs.</li>
+                        <li>Delivered graphic design services for clients.</li>
                     </ul>
                 </div>
             </div>
@@ -1634,27 +1381,42 @@
         });
 
         // ===========================
-        // RESUME DOWNLOAD TOGGLE
+        // PAGE FLIP LOGIC
         // ===========================
-        document.getElementById('resumeToggle').addEventListener('click', function(e) {
-            e.preventDefault();
-            document.getElementById('downloadOptions').classList.toggle('show');
-        });
+        function switchPage(pageId, btnElement) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page-section');
+            pages.forEach(page => {
+                page.classList.remove('active');
+                // Reset transform for a fresh flip
+                page.style.transform = 'perspective(1200px) rotateY(-15deg)';
+                page.style.opacity = '0';
+            });
 
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function(e) {
-            const wrapper = document.querySelector('.resume-btn-wrapper');
-            if (wrapper && !wrapper.contains(e.target)) {
-                document.getElementById('downloadOptions').classList.remove('show');
+            // Show the selected page
+            const activePage = document.getElementById('page-' + pageId);
+            if (activePage) {
+                // Small timeout to allow display:block to apply before transform
+                setTimeout(() => {
+                    activePage.classList.add('active');
+                    activePage.style.transform = 'perspective(1200px) rotateY(0deg)';
+                    activePage.style.opacity = '1';
+                }, 50);
             }
-        });
+
+            // Update active button state
+            const buttons = document.querySelectorAll('.aside-nav button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            if (btnElement) {
+                btnElement.classList.add('active');
+            }
+        }
 
         // ===========================
         // RESUME DOWNLOAD FUNCTIONS
         // ===========================
+        
         function downloadResume(format) {
-            document.getElementById('downloadOptions').classList.remove('show');
-
             if (format === 'txt') {
                 downloadTxtResume();
             } else if (format === 'pdf') {
@@ -1664,11 +1426,23 @@
             }
         }
 
-        // --- TXT Download ---
+        // --- TXT Download (Clean & Accurate) ---
         function downloadTxtResume() {
             const element = document.getElementById('resumeContent');
-            const content = element.innerText;
-            const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+            
+            // Create a clean text representation
+            let txt = "NAPHTALI SUNDAY\n";
+            txt += "Web Developer · Data Analyst · MEAL Specialist\n";
+            txt += "Yola, Adamawa, Nigeria | naphtalisunday2944@gmail.com | +234 80 1234 5678\n";
+            txt += "linkedin.com/in/naphtali-sunday-aa6201244 | github.com/sundaymilly\n";
+            txt += "==========================================================\n\n";
+
+            // Extract text content from the resume content, preserving line breaks
+            const textContent = element.innerText;
+            // Basic cleanup
+            txt += textContent.replace(/\n{3,}/g, '\n\n');
+
+            const blob = new Blob([txt], { type: 'text/plain;charset=utf-8' });
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
             link.download = 'Naphtali_Sunday_Resume.txt';
@@ -1678,29 +1452,30 @@
             URL.revokeObjectURL(link.href);
         }
 
-        // --- PDF Download using html2pdf ---
+        // --- PDF Download using html2pdf (Perfect Formatting) ---
         function downloadPdfResume() {
             const element = document.getElementById('resumeContent');
             
-            const btn = document.querySelector('.resume-btn');
-            const originalText = btn.innerHTML;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating PDF...';
-            btn.style.opacity = '0.7';
-
             // Clone the element to avoid layout issues
             const clone = element.cloneNode(true);
+            
+            // Style the clone for PDF generation
             clone.style.position = 'fixed';
             clone.style.left = '0';
             clone.style.top = '0';
             clone.style.width = '800px';
-            clone.style.background = '#fff';
+            clone.style.background = '#ffffff';
             clone.style.padding = '40px';
             clone.style.zIndex = '99999';
             clone.style.display = 'block';
+            clone.style.fontFamily = "'Inter', Arial, sans-serif";
+            clone.style.color = '#1a1a2e';
+            clone.style.lineHeight = '1.6';
+            
             document.body.appendChild(clone);
 
             const opt = {
-                margin: [10, 10, 10, 10],
+                margin: [0, 0, 0, 0], // Using padding on the element instead
                 filename: 'Naphtali_Sunday_Resume.pdf',
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: {
@@ -1709,7 +1484,9 @@
                     letterRendering: true,
                     backgroundColor: '#ffffff',
                     logging: false,
-                    width: 800
+                    width: 800,
+                    scrollY: 0,
+                    scrollX: 0
                 },
                 jsPDF: {
                     unit: 'mm',
@@ -1721,18 +1498,14 @@
 
             html2pdf().set(opt).from(clone).save().then(function() {
                 document.body.removeChild(clone);
-                btn.innerHTML = originalText;
-                btn.style.opacity = '1';
             }).catch(function(err) {
                 console.error('PDF generation error:', err);
                 document.body.removeChild(clone);
-                btn.innerHTML = originalText;
-                btn.style.opacity = '1';
-                alert('Error generating PDF. Please try again or use the Text format.');
+                alert('Error generating PDF. Please try the Text format instead.');
             });
         }
 
-        // --- Word Download (HTML format that Word can open) ---
+        // --- Word Download (HTML format that Word opens natively) ---
         function downloadWordResume() {
             const element = document.getElementById('resumeContent');
             const content = element.innerHTML;
@@ -1753,7 +1526,15 @@
                     </xml>
                     <![endif]-->
                     <style>
-                        body { font-family: 'Arial', sans-serif; max-width: 800px; margin: 0 auto; padding: 40px; color: #1a1a2e; line-height: 1.6; background: #fff; }
+                        body { 
+                            font-family: 'Inter', Arial, sans-serif; 
+                            max-width: 800px; 
+                            margin: 0 auto; 
+                            padding: 40px; 
+                            color: #1a1a2e; 
+                            line-height: 1.6; 
+                            background: #fff; 
+                        }
                         h1 { font-size: 28px; font-weight: 800; margin: 0; color: #0f172a; }
                         h2 { font-size: 16px; font-weight: 700; color: #1a5a8c; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 20px; }
                         table { width: 100%; border-collapse: collapse; }
