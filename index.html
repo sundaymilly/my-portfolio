@@ -162,8 +162,9 @@ const R={
   ['Data & MEAL Systems',['LAMIS','DHIS2','SQL','Data Quality Assurance','Indicator Tracking','Donor Reporting','Strategic Information','ETL Processes']],
   ['Capacity Building',['Training Facilitation','Coaching & Mentorship','Community Engagement','Stakeholder Coordination','Report Writing']],
   ['Tools & Design',['UI/UX Design','Adobe Photoshop','Microsoft Office Suite','Git','Figma']]],
+ ['IOT/IT',['Networking','troubleshooting','software installation and enterprise software operation','design','SysAdmin Operation']]],
  exp:[
-  {t:'MEAL Assistant',o:'Achieving Health Nigeria Initiative (AHNi) · USAID/PEPFAR ACE 1 · Yola, Adamawa',d:'Sep 2026 – Present',
+  {t:'MEAL Assistant',o:'Achieving Health Nigeria Initiative (AHNi) · USAID/PEPFAR BRIGDE · Yola, Adamawa',d:'Sep 2026 – Present',
    b:['Conduct data entry and monitoring of programme and client-level records, ensuring accuracy, completeness and consistency across supported health facilities.','Support data upload and reporting to the Electronic Medical Record (EMR) system and the National Data Repository (NDR), in line with reporting timelines and data standards.','Carry out data reconciliation and analysis, cross-checking records across data systems to resolve discrepancies and support accurate programme reporting.'],
    g:['EMR','NDR','Data Entry','Data Reconciliation','Data Analysis','Programme Reporting']},
   {t:'M&E Assistant / DEC',o:'Society for Family Health (SFH) · USAID/PEPFAR CARE 2 Project',d:'2025 – 2026',
@@ -187,8 +188,8 @@ const R={
   ['fa-graduation-cap','Technology-Enhanced Learning','Introduced technology-driven teaching tools, improving average student test scores by 20%.'],
   ['fa-code','End-to-End System Development','Designed and deployed a fully functional Web-based Integrated Restaurant System.'],
   ['fa-users','Capacity Building & Training','Trained 100+ individuals across cohorts in computer literacy, graphic design, programming and data management.'],
-  ['fa-handshake','Compliance & Client Retention','Maintained 100% regulatory compliance while achieving an 85% client retention rate.']],
- langs:[['English','Professional'],['Hausa','Native'],['Fulfulde','Native']]
+  ['fa-handshake','Compliance & Client Retention','Maintained 100% regulatory compliance while achieving an 95% client retention rate.']],
+ langs:[['English','Professional'],['Hausa','Native'],['Kaka','Native']]
 };
 const pl=s=>s.replace(/<[^>]+>/g,'');                        // strip markup
 const A=s=>pl(s).replace(/[–—]/g,'-').replace(/·/g,'|');      // ASCII-safe for PDF/TXT
@@ -215,7 +216,7 @@ const PG=[
  {k:'Contact',i:'fa-paper-plane',s:'Languages, contact details and resume',
   h:()=>`<div class="g2">`+[['fa-envelope','Email',R.email,'mailto:'+R.email],['fa-location-dot','Location',R.loc,'#'],['fa-brands fa-linkedin-in','LinkedIn',R.li,'https://www.'+R.li],['fa-brands fa-github','GitHub',R.gh,'https://'+R.gh]].map(c=>`<div class="card"><a class="ct" href="${c[3]}" target="_blank" rel="noopener"><i class="${c[0].includes('brands')?c[0]:'fas '+c[0]}"></i><div><small>${c[1]}</small><span>${esc(c[2])}</span></div></a></div>`).join('')+`</div>`+
    `<div class="sub" style="margin-top:18px">Languages</div><div class="chips">${R.langs.map(l=>`<span class="chip"><i class="fas fa-language"></i>${l[0]} · ${l[1]}</span>`).join('')}</div>`+
-   `<div class="sub" style="margin-top:22px">Download my resume</div><div class="cta"><button onclick="dlResume('pdf')"><i class="fas fa-file-pdf"></i>PDF</button><button onclick="dlResume('doc')"><i class="fas fa-file-word"></i>Word</button><button onclick="dlResume('txt')"><i class="fas fa-file-lines"></i>Text</button></div>`}
+   `<div class="sub" style="margin-top:22px">Download my resume</div><div class="cta"><button onclick="dlResume('pdf')"><i class="fas fa-file-pdf"></i>As PDF</button><button onclick="dlResume('doc')"><i class="fas fa-file-word"></i>As Word</button><button onclick="dlResume('txt')"><i class="fas fa-file-lines"></i>As Text</button></div>`}
 ];
 const $=id=>document.getElementById(id);
 $('book').innerHTML=PG.map((p,i)=>`<section class="page glass" data-s="${i?'future':'active'}">${hd(i+1,p.k,p.s)}${p.h()}</section>`).join('');
