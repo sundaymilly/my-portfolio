@@ -148,7 +148,7 @@ nav{display:flex;flex-direction:column;gap:4px}
 <script>
 /* ============ SINGLE SOURCE OF TRUTH (page + all resume formats) ============ */
 const R={
- name:'NAPHTAL SUNDAY',title:'Web Developer · Data Analyst · MEAL Specialist . IT Specialist',
+ name:'NAPHTALI SUNDAY',title:'Web Developer · Data Analyst · MEAL Specialist · IT Specialist',
  loc:'Yola, Adamawa, Nigeria',email:'naphtalisunday2944@gmail.com',
  li:'linkedin.com/in/naphtali-sunday-aa6201244',gh:'github.com/sundaymilly',
  about:[
@@ -161,8 +161,13 @@ const R={
   ['Web Development',['HTML5','CSS3','JavaScript','PHP','MySQL','React','Node.js','Bootstrap','REST APIs']],
   ['Data & MEAL Systems',['LAMIS','DHIS2','SQL','Data Quality Assurance','Indicator Tracking','Donor Reporting','Strategic Information','ETL Processes']],
   ['Capacity Building',['Training Facilitation','Coaching & Mentorship','Community Engagement','Stakeholder Coordination','Report Writing']],
-  ['Tools & Design',['UI/UX Design','Adobe Photoshop','Microsoft Office Suite','Git','Figma']]],
- ['IOT/IT',['Networking','troubleshooting','software installation and enterprise software operation','design','SysAdmin Operation']]],
+  ['Tools & Design',['UI/UX Design','Adobe Photoshop','Microsoft Office Suite','Git','Figma']],
+  ['IT Tools',['Microsoft 365','Remote Desktop Tools','Antivirus & Endpoint Security','Backup & Recovery Tools','Command Line / Terminal']],
+  ['Networking',['LAN/WAN Setup','TCP/IP, DHCP & DNS','Router & Wi-Fi Configuration','Network Troubleshooting','Structured Cabling']],
+  ['IT Support & Help Desk',['Hardware & Software Troubleshooting','Software Installation','Enterprise Software Operation','User Account Support','Incident Logging','SysAdmin Operations']],
+  ['Software Development & Engineering',['HTML5 / CSS3 / JavaScript','PHP & Node.js','React','REST APIs','Git & GitHub','System Design']],
+  ['Data & Database Management',['SQL','MySQL','Database Design','Data Cleaning & ETL','Data Quality Assurance','Backup & Restore']],
+  ['Cloud & Infrastructure',['Cloud Hosting Basics','Web Hosting & Domains','Windows / Linux Server Basics','Virtual Machines','Backup & Disaster Recovery']]],
  exp:[
   {t:'MEAL Assistant',o:'Achieving Health Nigeria Initiative (AHNi) · USAID/PEPFAR BRIGDE · Yola, Adamawa',d:'Sep 2026 – Present',
    b:['Conduct data entry and monitoring of programme and client-level records, ensuring accuracy, completeness and consistency across supported health facilities.','Support data upload and reporting to the Electronic Medical Record (EMR) system and the National Data Repository (NDR), in line with reporting timelines and data standards.','Carry out data reconciliation and analysis, cross-checking records across data systems to resolve discrepancies and support accurate programme reporting.'],
@@ -188,7 +193,7 @@ const R={
   ['fa-graduation-cap','Technology-Enhanced Learning','Introduced technology-driven teaching tools, improving average student test scores by 20%.'],
   ['fa-code','End-to-End System Development','Designed and deployed a fully functional Web-based Integrated Restaurant System.'],
   ['fa-users','Capacity Building & Training','Trained 100+ individuals across cohorts in computer literacy, graphic design, programming and data management.'],
-  ['fa-handshake','Compliance & Client Retention','Maintained 100% regulatory compliance while achieving an 95% client retention rate.']],
+  ['fa-handshake','Compliance & Client Retention','Maintained 100% regulatory compliance while achieving a 95% client retention rate.']],
  langs:[['English','Professional'],['Hausa','Native'],['Kaka','Native']]
 };
 const pl=s=>s.replace(/<[^>]+>/g,'');                        // strip markup
@@ -275,7 +280,7 @@ function buildPdf(){
  y+=62;
  sec('Professional Summary');para(summary(),9.8);
  sec('Technical Skills');
- R.skills.forEach(([c,items])=>{const L=d.splitTextToSize(A(items.join(', ')),CW-128);need(L.length*13+4);font('bold',9.5,dk);d.text(A(c),M,y);font('normal',9.5,bd2);L.forEach(l=>{d.text(l,M+128,y);y+=13});y+=3});
+ R.skills.forEach(([c,items])=>{const L=d.splitTextToSize(A(items.join(', ')),CW);need(L.length*13+16);font('bold',9.5,dk);d.text(A(c),M,y);y+=12.5;font('normal',9.5,bd2);L.forEach(l=>{d.text(l,M+10,y);y+=13});y+=4});
  sec('Professional Experience');
  R.exp.forEach(e=>{entry(e.t,e.d,e.o);e.b.forEach(bl);y+=5});
  sec('Education');
@@ -308,7 +313,7 @@ h3{font-size:11pt;color:#0f172a;margin:0}p{margin:2pt 0}ul{margin:2pt 0 4pt 16pt
 <table width="100%" cellpadding="14" cellspacing="0"><tr><td bgcolor="#1a5a8c"><h1>${e(R.name.toUpperCase())}</h1><p style="color:#dbeafe;font-size:12pt">${e(R.title)}</p><p style="color:#fff;font-size:9.5pt">${e(R.loc)} &nbsp;|&nbsp; ${e(R.email)} &nbsp;|&nbsp; ${e(R.li)} &nbsp;|&nbsp; ${e(R.gh)}</p></td></tr></table>
 <table class="st" width="100%" cellspacing="0" style="margin-top:8pt"><tr>${R.stats.map(s=>`<td><span class="sn">${s[0]}</span><br><span class="sl">${e(s[1])}</span></td>`).join('')}</tr></table>
 <h2>Professional Summary</h2><p>${e(summary())}</p>
-<h2>Technical Skills</h2><table class="sk" width="100%">${R.skills.map(c=>`<tr><td width="24%"><b>${e(c[0])}</b></td><td>${e(c[1].join(', '))}</td></tr>`).join('')}</table>
+<h2>Technical Skills</h2><table class="sk" width="100%">${R.skills.map(c=>`<tr><td width="34%"><b>${e(c[0])}</b></td><td>${e(c[1].join(', '))}</td></tr>`).join('')}</table>
 <h2>Professional Experience</h2>${R.exp.map(x=>ent(x.t,x.d,x.o)+ul(x.b)).join('')}
 <h2>Education</h2>${R.edu.map(x=>ent(x.t,x.d,x.o)+ul([x.n])).join('')}
 <h2>Certifications</h2><table class="sk" width="100%">${R.certs.map(c=>`<tr><td width="46%"><b>${e(c[0])}</b></td><td>${e(c[1])}</td><td align="right" class="dt">${c[2]}</td></tr>`).join('')}</table>
@@ -327,7 +332,7 @@ function buildTxt(){
  L.push(R.name.toUpperCase(),A(R.title),A(R.loc)+' | '+R.email,R.li+' | '+R.gh,'='.repeat(W));
  sec('Professional Summary');L.push(wrap(summary(),W));
  sec('Key Metrics');L.push(R.stats.map(s=>A(s[1])+': '+s[0]).join('\n'));
- sec('Technical Skills');R.skills.forEach(([c,i])=>L.push(wrap(i.join(', '),W,(c+':').padEnd(24),' '.repeat(24))));
+ sec('Technical Skills');R.skills.forEach(([c,i])=>L.push(c+':',wrap(i.join(', '),W,'  ','  ')));
  sec('Professional Experience');R.exp.forEach(e=>{ent(e.t,e.d,e.o);e.b.forEach(b=>L.push(wrap(b,W,'  - ','    ')))});
  sec('Education');R.edu.forEach(e=>{ent(e.t,e.d,e.o);L.push(wrap(e.n,W,'  - ','    '))});
  sec('Certifications');R.certs.forEach(c=>L.push(wrap(c[0]+' - '+c[1]+' ('+c[2]+')',W,'  - ','    ')));
